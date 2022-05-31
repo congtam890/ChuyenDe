@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HP\\Desktop\\QuanLyQuanCf\\NewFolder\\QuanLyQuanCafe\\QuanLyQuanCafe\\QuanLyQuanCafe.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\Desktop\\ChuyenDe\\QuanLyQuanCafe\\QuanLyQuanCafe\\QuanLyQuanCafe.csproj",
       "projectName": "QuanLyQuanCafe",
-      "projectPath": "C:\\Users\\HP\\Desktop\\QuanLyQuanCf\\NewFolder\\QuanLyQuanCafe\\QuanLyQuanCafe\\QuanLyQuanCafe.csproj",
+      "projectPath": "C:\\Users\\HP\\Desktop\\ChuyenDe\\QuanLyQuanCafe\\QuanLyQuanCafe\\QuanLyQuanCafe.csproj",
       "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP\\Desktop\\QuanLyQuanCf\\NewFolder\\QuanLyQuanCafe\\QuanLyQuanCafe\\obj\\",
+      "outputPath": "C:\\Users\\HP\\Desktop\\ChuyenDe\\QuanLyQuanCafe\\QuanLyQuanCafe\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -32,8 +32,8 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.textboxPassword = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.tPassword = new System.Windows.Forms.TextBox();
+            this.tbpassword = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tbLogin = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -75,33 +75,33 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.textboxPassword);
-            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.tPassword);
+            this.panel3.Controls.Add(this.tbpassword);
             this.panel3.Location = new System.Drawing.Point(6, 56);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(536, 57);
             this.panel3.TabIndex = 1;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
-            // textboxPassword
+            // tPassword
             // 
-            this.textboxPassword.Location = new System.Drawing.Point(194, 7);
-            this.textboxPassword.Name = "textboxPassword";
-            this.textboxPassword.Size = new System.Drawing.Size(327, 23);
-            this.textboxPassword.TabIndex = 2;
-            this.textboxPassword.UseSystemPasswordChar = true;
-            this.textboxPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.tPassword.Location = new System.Drawing.Point(194, 7);
+            this.tPassword.Name = "tPassword";
+            this.tPassword.Size = new System.Drawing.Size(327, 23);
+            this.tPassword.TabIndex = 2;
+            this.tPassword.UseSystemPasswordChar = true;
+            this.tPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // label2
+            // tbpassword
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(68, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 22);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Password:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.tbpassword.AutoSize = true;
+            this.tbpassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tbpassword.Location = new System.Drawing.Point(68, 7);
+            this.tbpassword.Name = "tbpassword";
+            this.tbpassword.Size = new System.Drawing.Size(110, 22);
+            this.tbpassword.TabIndex = 0;
+            this.tbpassword.Text = "Password:";
+            this.tbpassword.Click += new System.EventHandler(this.label2_Click);
             // 
             // panel2
             // 
@@ -133,8 +133,10 @@
             // 
             // Login
             // 
+            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonExit;
             this.ClientSize = new System.Drawing.Size(555, 173);
             this.Controls.Add(this.panel1);
             this.Name = "Login";
@@ -156,8 +158,8 @@
         private Label label1;
         private TextBox tbLogin;
         private Panel panel3;
-        private TextBox textboxPassword;
-        private Label label2;
+        private TextBox tPassword;
+        private Label tbpassword;
         private Button btnLogin;
         private Button buttonExit;
     }
