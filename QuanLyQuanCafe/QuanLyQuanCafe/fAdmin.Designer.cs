@@ -223,9 +223,9 @@
             this.label12.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label12.Location = new System.Drawing.Point(10, 13);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(87, 19);
+            this.label12.Size = new System.Drawing.Size(98, 19);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Danh mục";
+            this.label12.Text = "Tên hiển thị";
             // 
             // panel25
             // 
@@ -250,9 +250,9 @@
             this.label11.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label11.Location = new System.Drawing.Point(10, 13);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(87, 19);
+            this.label11.Size = new System.Drawing.Size(116, 19);
             this.label11.TabIndex = 0;
-            this.label11.Text = "Danh mục";
+            this.label11.Text = "Loại tài khoản";
             // 
             // panel23
             // 
@@ -939,6 +939,7 @@
             this.Controls.Add(this.tcAdmin);
             this.Name = "fAdmin";
             this.Text = "Admin";
+            this.Load += new System.EventHandler(this.fAdmin_Load);
             this.tpAccount.ResumeLayout(false);
             this.panel21.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).EndInit();

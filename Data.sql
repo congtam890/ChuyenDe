@@ -49,3 +49,21 @@ count int not null default 0,
 foreign key (idBill) references dbo.Bill(id),
 foreign key (idFood) references dbo.Food(id)
 )
+
+insert into dbo.Account values ('admin','1234','Admin',1);
+insert into dbo.Account values ('nv001','1234',N'Nhân viên 1',0);
+insert into dbo.Account values ('nv002','1234',N'Nhân viên 2',0);
+
+select * from dbo.Account
+
+go
+
+create proc USP_GetListAccountByUserName
+@userName nvarchar(100)
+as
+begin
+select * from dbo.Account where UserName=@userName
+end
+go
+
+exec dbo.USP_GetListAccountByUserName @userName = N'nv001'

@@ -1,6 +1,6 @@
 ﻿namespace QuanLyQuanCafe
 {
-    partial class Login
+    partial class fLogin
     {
         /// <summary>
         ///  Required designer variable.
@@ -50,7 +50,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(545, 196);
+            this.panel1.Size = new System.Drawing.Size(531, 149);
             this.panel1.TabIndex = 0;
             // 
             // buttonExit
@@ -131,7 +131,7 @@
             this.label1.Text = "Tên Đăng Nhập:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // Login
+            // fLogin
             // 
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -139,7 +139,7 @@
             this.CancelButton = this.buttonExit;
             this.ClientSize = new System.Drawing.Size(555, 173);
             this.Controls.Add(this.panel1);
-            this.Name = "Login";
+            this.Name = "fLogin";
             this.Text = "Đăng Nhập";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Login_FormClosing);
             this.panel1.ResumeLayout(false);
