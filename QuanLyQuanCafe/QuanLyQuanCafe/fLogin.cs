@@ -22,7 +22,7 @@ namespace QuanLyQuanCafe
         private void button1_Click(object sender, EventArgs e)
         {
             string userName = tbLogin.Text;
-            string passWord = tbpassword.Text;
+            string passWord = tbPassword.Text;
             if (Login(userName,passWord))
             {
                 TableManager f = new TableManager();

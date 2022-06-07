@@ -16,11 +16,9 @@ namespace QuanLyQuanCafe.DAO
             get { if (instance == null) instance = new DataProvider();return DataProvider.instance; }
             private set { DataProvider.instance = value; }
         }
-        private DataProvider() { }
+        private DataProvider(){}
 
-        string connectionSTR = "Data Source=DESKTOP-B3NPLBG;Initial Catalog=QuanLyQuanCafe;Integrated Security=True";
-
-       
+        private string connectionSTR = "Data Source=DESKTOP-B3NPLBG;Initial Catalog=QuanLyQuanCafe;Integrated Security=True";
 
         public DataTable ExecuteQuery(string query, object[] parameter = null)
         {
@@ -45,7 +43,6 @@ namespace QuanLyQuanCafe.DAO
                     }    
                 }
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
-
                 adapter.Fill(data);
                 connection.Close();
             }    

@@ -32,8 +32,8 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.tPassword = new System.Windows.Forms.TextBox();
-            this.tbpassword = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.text = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tbLogin = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -75,33 +75,33 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.tPassword);
-            this.panel3.Controls.Add(this.tbpassword);
+            this.panel3.Controls.Add(this.tbPassword);
+            this.panel3.Controls.Add(this.text);
             this.panel3.Location = new System.Drawing.Point(6, 56);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(536, 57);
             this.panel3.TabIndex = 1;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
-            // tPassword
+            // tbPassword
             // 
-            this.tPassword.Location = new System.Drawing.Point(194, 7);
-            this.tPassword.Name = "tPassword";
-            this.tPassword.Size = new System.Drawing.Size(327, 23);
-            this.tPassword.TabIndex = 2;
-            this.tPassword.UseSystemPasswordChar = true;
-            this.tPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.tbPassword.Location = new System.Drawing.Point(194, 7);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(327, 23);
+            this.tbPassword.TabIndex = 2;
+            this.tbPassword.UseSystemPasswordChar = true;
+            this.tbPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // tbpassword
+            // text
             // 
-            this.tbpassword.AutoSize = true;
-            this.tbpassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.tbpassword.Location = new System.Drawing.Point(68, 7);
-            this.tbpassword.Name = "tbpassword";
-            this.tbpassword.Size = new System.Drawing.Size(110, 22);
-            this.tbpassword.TabIndex = 0;
-            this.tbpassword.Text = "Password:";
-            this.tbpassword.Click += new System.EventHandler(this.label2_Click);
+            this.text.AutoSize = true;
+            this.text.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.text.Location = new System.Drawing.Point(68, 7);
+            this.text.Name = "text";
+            this.text.Size = new System.Drawing.Size(110, 22);
+            this.text.TabIndex = 0;
+            this.text.Text = "Password:";
+            this.text.Click += new System.EventHandler(this.label2_Click);
             // 
             // panel2
             // 
@@ -158,8 +158,8 @@
         private Label label1;
         private TextBox tbLogin;
         private Panel panel3;
-        private TextBox tPassword;
-        private Label tbpassword;
+        private TextBox tbPassword;
+        private Label text;
         private Button btnLogin;
         private Button buttonExit;
     }

@@ -16,11 +16,11 @@ namespace QuanLyQuanCafe.DAO
             get { if (instance == null) instance = new AccountDAO(); return instance; }
             private set { instance = value; }
         }
-        private  AccountDAO() { }
+        private AccountDAO() { }
 
-        public bool Login(string userName, string password)
+        public bool Login(string userName, string passWord)
         {
-            string query = "SELECT * FROM dbo.Account Where UserName =" + userName +"'AND password ="+password+"'";
+            string query = "SELECT * FROM dbo.Account WHERE UserName = N'" + userName + "' AND PassWord = N'" + passWord + "' ";
             DataTable result = DataProvider.Instance.ExecuteQuery(query);
             return result.Rows.Count > 0;
         }

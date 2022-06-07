@@ -62,7 +62,7 @@
             this.thôngTinTàiKhoảnToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(825, 24);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -86,21 +86,21 @@
             // thôngTinCáNhânToolStripMenuItem
             // 
             this.thôngTinCáNhânToolStripMenuItem.Name = "thôngTinCáNhânToolStripMenuItem";
-            this.thôngTinCáNhânToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thôngTinCáNhânToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.thôngTinCáNhânToolStripMenuItem.Text = "Thông tin cá nhân";
             this.thôngTinCáNhânToolStripMenuItem.Click += new System.EventHandler(this.thôngTinCáNhânToolStripMenuItem_Click);
             // 
             // đăngXuấtToolStripMenuItem
             // 
             this.đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             this.đăngXuấtToolStripMenuItem.Click += new System.EventHandler(this.đăngXuấtToolStripMenuItem_Click);
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.lsvBill);
-            this.panel2.Location = new System.Drawing.Point(475, 102);
+            this.panel2.Location = new System.Drawing.Point(481, 102);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(313, 275);
             this.panel2.TabIndex = 2;
@@ -120,7 +120,7 @@
             this.panel3.Controls.Add(this.nDiscount);
             this.panel3.Controls.Add(this.btnGiamGia);
             this.panel3.Controls.Add(this.btnThanhToan);
-            this.panel3.Location = new System.Drawing.Point(475, 383);
+            this.panel3.Location = new System.Drawing.Point(484, 383);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(313, 55);
             this.panel3.TabIndex = 3;
@@ -176,7 +176,7 @@
             this.panel4.Controls.Add(this.btnAddFood);
             this.panel4.Controls.Add(this.cbFood);
             this.panel4.Controls.Add(this.cbCategory);
-            this.panel4.Location = new System.Drawing.Point(475, 27);
+            this.panel4.Location = new System.Drawing.Point(481, 27);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(313, 66);
             this.panel4.TabIndex = 4;
@@ -223,16 +223,18 @@
             // 
             // flpTable
             // 
+            this.flpTable.AutoScroll = true;
             this.flpTable.Location = new System.Drawing.Point(12, 30);
             this.flpTable.Name = "flpTable";
-            this.flpTable.Size = new System.Drawing.Size(457, 408);
+            this.flpTable.Size = new System.Drawing.Size(449, 408);
             this.flpTable.TabIndex = 5;
+            this.flpTable.Paint += new System.Windows.Forms.PaintEventHandler(this.flpTable_Paint);
             // 
             // TableManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(825, 450);
             this.Controls.Add(this.flpTable);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
