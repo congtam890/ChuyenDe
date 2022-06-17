@@ -1,5 +1,7 @@
-﻿using System;
+﻿using QuanLyQuanCafe.DTO;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +22,14 @@ namespace QuanLyQuanCafe.DAO
         }
         public int GetUncheckBillIDbyTableID(int id)
         {
-            return DataProvider.Instance.ExecuteScalar("");
+            DataTable data = DataProvider.Instance.ExecuteQuery("select * from dbo.Bill where idTable = "+ id +" and status = 0");
+
+            if (data.Rows.Count > 0)
+            {
+                Bill bill = new Bill(data.Rows[0]);
+                return bill.ID;
+            }
+            return -1;//that bai = -1
         }
     }
 }

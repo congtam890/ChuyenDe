@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.ListViewItem;
 
 namespace QuanLyQuanCafe
 {
@@ -45,14 +46,22 @@ namespace QuanLyQuanCafe
         
         void ShowBill(int id)
         {
+            lsvBill.Items.Clear();
+            List<BillInfo> listBillInfo = BillInfoDAO.Instance.GetListBillInfo(BillDAO.Intance.GetUncheckBillIDbyTableID(id));
 
+            foreach (BillInfo item in listBillInfo) 
+            {
+                ListViewItem lsvItem = new ListViewItem(item.foodID.ToString());
+                lsvItem.SubItems.Add(item.Count.ToString());
+                lsvBill.Items.Add(lsvItem); 
+            }
         }
         #endregion
 
         #region Events
         private void Btn_Click(object sender, EventArgs e)
         {
-            int tableID = (sender as Table).ID;
+            int tableID = ((sender as Button).Tag as Table).ID;
             ShowBill(tableID);
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -127,5 +136,10 @@ namespace QuanLyQuanCafe
 
         }
         #endregion
+
+        private void lsvBill_SelectedIndexChanged(object sender, EventArgs e)
+        {
+             
+        }
     }
 }
