@@ -64,6 +64,29 @@ namespace QuanLyQuanCafe
             int tableID = ((sender as Button).Tag as Table).ID;
             ShowBill(tableID);
         }
+      
+        private void thôngTinCáNhânToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fAccountProfile f = new fAccountProfile();
+            f.ShowDialog();
+        }
+
+        private void aminToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fAdmin f = new fAdmin();
+            f.ShowDialog();
+        }
+
+        private void flpTable_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        #endregion
+
+        private void lsvBill_SelectedIndexChanged(object sender, EventArgs e)
+        {
+             
+        }
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -119,27 +142,5 @@ namespace QuanLyQuanCafe
             this.Close();
         }
 
-        private void thôngTinCáNhânToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            fAccountProfile f = new fAccountProfile();
-            f.ShowDialog();
-        }
-
-        private void aminToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            fAdmin f = new fAdmin();
-            f.ShowDialog();
-        }
-
-        private void flpTable_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        #endregion
-
-        private void lsvBill_SelectedIndexChanged(object sender, EventArgs e)
-        {
-             
-        }
     }
 }

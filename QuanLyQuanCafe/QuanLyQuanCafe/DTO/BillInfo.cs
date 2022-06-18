@@ -19,9 +19,9 @@ namespace QuanLyQuanCafe.DTO
         public BillInfo(DataRow row)
         {
             this.ID =(int)row["id"];
-            this.BillID = (int)row[idbill];
-            this.FoodID =(int)row[foodID];
-            this.Count =(int)row[count];  
+            this.BillID = (int)row["idbill"];
+            this.FoodID =(int)row["idfood"];
+            this.Count =(int)row["count"];  
         }
         private int count;
 
@@ -37,10 +37,10 @@ namespace QuanLyQuanCafe.DTO
             set { iD = value; }
         }
 
-        public int idbill
+        public int billID
         {
-            get { return idbill; }
-            set { idbill = value; }
+            get { return billID; }
+            set { billID = value; }
         }
 
         public int foodID
@@ -51,8 +51,8 @@ namespace QuanLyQuanCafe.DTO
 
         public int Count 
         { 
-            get { return Count; }
-            set { Count = value; }
+            get { return count; }
+            set { count = value; }
         }
     }
 }
