@@ -47,12 +47,14 @@ namespace QuanLyQuanCafe
         void ShowBill(int id)
         {
             lsvBill.Items.Clear();
-            List<BillInfo> listBillInfo = BillInfoDAO.Instance.GetListBillInfo(BillDAO.Intance.GetUncheckBillIDbyTableID(id));
+            List<Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
 
-            foreach (BillInfo item in listBillInfo) 
+            foreach (Menu item in listBillInfo) 
             {
-                ListViewItem lsvItem = new ListViewItem(item.foodID.ToString());
+                ListViewItem lsvItem = new ListViewItem(item.FoodName.ToString());
                 lsvItem.SubItems.Add(item.Count.ToString());
+                lsvItem.SubItems.Add(item.Price.ToString());
+                lsvItem.SubItems.Add(item.ToatalPrice.ToString());
                 lsvBill.Items.Add(lsvItem); 
             }
         }
@@ -81,11 +83,9 @@ namespace QuanLyQuanCafe
         {
 
         }
-        #endregion
-
         private void lsvBill_SelectedIndexChanged(object sender, EventArgs e)
         {
-             
+
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -141,6 +141,9 @@ namespace QuanLyQuanCafe
         {
             this.Close();
         }
+        #endregion
+
+
 
     }
 }

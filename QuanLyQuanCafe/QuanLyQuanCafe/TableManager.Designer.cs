@@ -49,6 +49,8 @@
             this.thôngTinCáNhânToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.đăngXuấtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nDiscount)).BeginInit();
@@ -69,7 +71,9 @@
             // 
             this.lsvBill.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2});
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
             this.lsvBill.ForeColor = System.Drawing.SystemColors.Window;
             this.lsvBill.GridLines = true;
             this.lsvBill.Location = new System.Drawing.Point(0, 3);
@@ -82,11 +86,12 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "ID food";
+            this.columnHeader1.Text = "Tên món";
+            this.columnHeader1.Width = 90;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Count";
+            this.columnHeader2.Text = "Số lượng";
             // 
             // panel3
             // 
@@ -247,6 +252,16 @@
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Đơn giá";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Thành tiền";
+            this.columnHeader4.Width = 80;
+            // 
             // TableManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -294,5 +309,7 @@
         private ToolStripMenuItem thôngTinCáNhânToolStripMenuItem;
         private ToolStripMenuItem đăngXuấtToolStripMenuItem;
         private MenuStrip menuStrip2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
     }
 }

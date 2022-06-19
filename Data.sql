@@ -80,6 +80,7 @@ begin
 	set @i = @i +1
 end
 -----Bill------
+s
 insert into dbo.Bill values (GETDATE(),NULL,1,0);
 insert into dbo.Bill values (GETDATE(),GETDATE(),2,1);
 insert into dbo.Bill values (GETDATE(),NULL,6,0);
@@ -109,7 +110,7 @@ go
 
 exec dbo.USP_GetListAccountByUserName @userName = N'nv001'
 
-
+select * form 
 -----------
 create proc USP_GetTableList
 as select * from dbo.TableFood
@@ -119,3 +120,5 @@ exec dbo.USP_GetTableList
 
 update dbo.TableFood set status = N'Có người' where id = 9
 
+select * from dbo.BillInfo
+select *from dbo.BillInfo as bi, dbo.Bill as b, dbo.food as f where bi.idBill = b.id and bi.idFood = f.id and b.idTable =  3
