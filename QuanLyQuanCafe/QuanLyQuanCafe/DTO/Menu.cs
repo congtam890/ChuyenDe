@@ -14,27 +14,28 @@ namespace QuanLyQuanCafe.DTO
             this.FoodName = foodName;
             this.Count = count;
             this.Price = price;
-            this.toatalPrice = totalPrice;
+            this.totalPrice = totalPrice;
         }
         public Menu(DataRow row)
         {
-            this.FoodName = row["Name"].ToString();
+            this.FoodName = row["name"].ToString();
             this.Count = (int)row["count"];
             this.Price = (float)Convert.ToDouble(row["price"].ToString());
-            this.toatalPrice = (float)Convert.ToDouble(row["totalPrice"].ToString());
+            this.totalPrice = (float)Convert.ToDouble(row["totalPrice"].ToString());
         }
         private string foodName;
 
-        public string FoodName { get { return foodName; } set { foodName = value; } }
-        public float Price { get { return price; } set { price = value; } }
-        public int Count { get { return count; } set { count = value; } }
-        public float ToatalPrice { get { return toatalPrice; } set { toatalPrice = value; } }
 
         private float price;
 
         private int count;
 
-        private float toatalPrice;
+        private float totalPrice;
+        public string FoodName { get { return foodName; } set { foodName = value; } }
+        public float Price { get { return price; } set { price = value; } }
+        public int Count { get { return count; } set { count = value; } }
+        public float TotalPrice { get { return totalPrice; } set { totalPrice = value; } }
+
     }
     
 }

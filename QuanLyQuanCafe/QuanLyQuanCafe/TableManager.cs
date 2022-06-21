@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -48,20 +49,24 @@ namespace QuanLyQuanCafe
         {
             lsvBill.Items.Clear();
             List<Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
-
+            float totalPrice = 0;
             foreach (Menu item in listBillInfo) 
             {
                 ListViewItem lsvItem = new ListViewItem(item.FoodName.ToString());
                 lsvItem.SubItems.Add(item.Count.ToString());
                 lsvItem.SubItems.Add(item.Price.ToString());
-                lsvItem.SubItems.Add(item.ToatalPrice.ToString());
+                lsvItem.SubItems.Add(item.TotalPrice.ToString());
+                totalPrice += item.TotalPrice;
                 lsvBill.Items.Add(lsvItem); 
             }
+            CultureInfo culture = new CultureInfo("vi-VN");// doi don vi tien te
+            txbTotalPrice.Text = totalPrice.ToString("c", culture);// hien tong tien
         }
         #endregion
 
         #region Events
-        private void Btn_Click(object sender, EventArgs e)
+        // show bill
+         void Btn_Click(object sender, EventArgs e)
         {
             int tableID = ((sender as Button).Tag as Table).ID;
             ShowBill(tableID);
@@ -141,9 +146,14 @@ namespace QuanLyQuanCafe
         {
             this.Close();
         }
+
+
         #endregion
 
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
 
-
+        }
     }
+
 }
