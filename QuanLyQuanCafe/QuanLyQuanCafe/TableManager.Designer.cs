@@ -75,20 +75,17 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.lsvBill.ForeColor = System.Drawing.SystemColors.Window;
-            this.lsvBill.GridLines = true;
-            this.lsvBill.Location = new System.Drawing.Point(6, 6);
+            this.lsvBill.Location = new System.Drawing.Point(3, 3);
             this.lsvBill.Name = "lsvBill";
             this.lsvBill.Size = new System.Drawing.Size(366, 287);
             this.lsvBill.TabIndex = 0;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
             this.lsvBill.View = System.Windows.Forms.View.Details;
-            this.lsvBill.SelectedIndexChanged += new System.EventHandler(this.lsvBill_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Tên món";
-            this.columnHeader1.Width = 90;
+            this.columnHeader1.Width = 160;
             // 
             // columnHeader2
             // 
@@ -97,7 +94,7 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Đơn giá";
-            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader3.Width = 65;
             // 
             // columnHeader4
             // 
@@ -206,6 +203,7 @@
             this.btnAddFood.TabIndex = 2;
             this.btnAddFood.Text = "Thêm món";
             this.btnAddFood.UseVisualStyleBackColor = true;
+            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
             // 
             // cbFood
             // 
@@ -304,7 +302,6 @@
 
         #endregion
         private Panel panel2;
-        private ListView lsvBill;
         private Panel panel3;
         private Panel panel4;
         private ComboBox cbFood;
@@ -317,15 +314,16 @@
         private Button btnChuyenBan;
         private NumericUpDown nDiscount;
         private ComboBox cbChuyenBan;
-        private ColumnHeader columnHeader1;
-        private ColumnHeader columnHeader2;
         private ToolStripMenuItem aminToolStripMenuItem;
         private ToolStripMenuItem thôngTinTàiKhoảnToolStripMenuItem;
         private ToolStripMenuItem thôngTinCáNhânToolStripMenuItem;
         private ToolStripMenuItem đăngXuấtToolStripMenuItem;
         private MenuStrip menuStrip2;
+        private TextBox txbTotalPrice;
+        private ListView lsvBill;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
-        private TextBox txbTotalPrice;
     }
 }

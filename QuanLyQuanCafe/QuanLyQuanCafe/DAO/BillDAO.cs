@@ -22,7 +22,7 @@ namespace QuanLyQuanCafe.DAO
         }
         public int GetUncheckBillIDbyTableID(int id)
         {
-            DataTable data = DataProvider.Instance.ExecuteQuery("select * from dbo.Bill where idTable = "+ id +" and status = 0");
+            DataTable data = DataProvider.Instance.ExecuteQuery("select * from dbo.Bill where idTable = " + id + " and status = 0");
 
             if (data.Rows.Count > 0)
             {
@@ -30,6 +30,22 @@ namespace QuanLyQuanCafe.DAO
                 return bill.ID;
             }
             return -1;//that bai = -1
+        }
+        public void InsertBill(int id)
+        {
+            DataProvider.Instance.ExecuteNonQuery("exec USP_InsertBill @idTable", new object[]{id});
+        }
+
+        public int GetMaxIDBill()
+        {
+            try
+            {
+                return (int)DataProvider.Instance.ExecuteScalar("select MAX(id) from dbo.Bill");
+            }
+            catch
+            {
+                return 1;
+            }
         }
     }
 }

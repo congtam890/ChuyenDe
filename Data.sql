@@ -120,6 +120,38 @@ exec dbo.USP_GetTableList
 
 update dbo.TableFood set status = N'Có người' where id = 9
 
-select * from dbo.BillInfo
-select f.name, bi.count,f.price, f.price*bi.count as totalPrice from dbo.BillInfo as bi, dbo.Bill as b, dbo.food as f 
- where bi.idBill = b.id and bi.idFood = f.id and b.idTable = 1
+create proc USP_InsertBill
+@idTable INT
+as
+begin
+	insert into dbo.Bill values(GetDate(),NULL,@idTable,0)
+end
+go
+
+CREATE PROC USP_InsertBillInfo
+@idBill INT, @idFood INT, @count INT
+AS
+BEGIN
+
+	DECLARE @isExitsBillInfo INT
+	DECLARE @foodCount INT = 1
+	
+	SELECT @isExitsBillInfo = id, @foodCount = b.count 
+	FROM dbo.BillInfo AS b 
+	WHERE idBill = @idBill AND idFood = @idFood
+
+	IF (@isExitsBillInfo > 0)
+	BEGIN
+		DECLARE @newCount INT = @foodCount + @count
+		IF (@newCount > 0)
+			UPDATE dbo.BillInfo	SET count = @foodCount + @count WHERE idFood = @idFood
+		ELSE
+			DELETE dbo.BillInfo WHERE idBill = @idBill AND idFood = @idFood
+	END
+	ELSE
+	BEGIN
+		insert into dbo.BillInfo values(@idBill,@idBill,@count)
+	END
+END
+
+

@@ -25,7 +25,6 @@ namespace QuanLyQuanCafe.DTO
         }
         private string foodName;
 
-
         private float price;
 
         private int count;

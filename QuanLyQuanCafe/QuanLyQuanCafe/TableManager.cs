@@ -20,8 +20,21 @@ namespace QuanLyQuanCafe
         {
             InitializeComponent();
             LoadTable();
+            LoadCategory();
         }
         #region Method
+        void LoadCategory()
+        {
+            List<Category> listCategory = CategoryDAO.Instance.GetListCategory();
+            cbCategory.DataSource = listCategory;
+            cbCategory.DisplayMember = "Name";
+        }
+        void LoadFoodListByCategoryID(int id)
+        {
+            List<Food> listFood = FoodDAO.Instance.GetFoodByCategoryID(id);
+            cbFood.DataSource = listFood;
+            cbFood.DisplayMember = "Name";
+        }
         void LoadTable()
         {
             List<Table> tableList = TableDAO.Instance.LoadTableList();
@@ -69,9 +82,10 @@ namespace QuanLyQuanCafe
          void Btn_Click(object sender, EventArgs e)
         {
             int tableID = ((sender as Button).Tag as Table).ID;
+            lsvBill.Tag = (sender as Button).Tag;
             ShowBill(tableID);
         }
-      
+        
         private void thôngTinCáNhânToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fAccountProfile f = new fAccountProfile();
@@ -88,10 +102,7 @@ namespace QuanLyQuanCafe
         {
 
         }
-        private void lsvBill_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+      
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -115,6 +126,17 @@ namespace QuanLyQuanCafe
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            int id = 0;
+
+            ComboBox cb = sender as ComboBox;
+
+            if (cb.SelectedItem == null)
+                return;
+
+            Category selected = cb.SelectedItem as Category;
+            id = selected.ID;
+
+            LoadFoodListByCategoryID(id);
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -146,14 +168,36 @@ namespace QuanLyQuanCafe
         {
             this.Close();
         }
+        private void lsvBill_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
-
-        #endregion
-
+        }
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }
+        private void btnAddFood_Click(object sender, EventArgs e)
+        {
+            Table table = lsvBill.Tag as Table;
+
+            int idBill = BillDAO.Intance.GetUncheckBillIDbyTableID(table.ID);
+            int foodID = (cbFood.SelectedItem as Food).ID;
+            int count = (int)nmFoodCount.Value;
+            if(idBill == -1)
+            {
+                BillDAO.Intance.InsertBill(table.ID);
+                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Intance.GetMaxIDBill(), foodID, count);
+            } 
+            else
+            {
+                BillInfoDAO.Instance.InsertBillInfo(idBill,foodID,count);
+            }
+            ShowBill(table.ID);
+            LoadTable();
+        }
+        #endregion
+
+
     }
 
 }
