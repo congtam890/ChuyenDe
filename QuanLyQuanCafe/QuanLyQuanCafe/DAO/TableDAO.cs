@@ -12,6 +12,10 @@ namespace QuanLyQuanCafe.DAO
     {
         private static TableDAO instance;
 
+        public void SwitchTable(int id1, int id2)
+        {
+            DataProvider.Instance.ExecuteQuery("dbo.USP_SwitchTable @idTable1 , @idTable2",new object []{id1, id2 });
+        }
         public static TableDAO Instance 
         {
             get { if (instance == null) instance = new TableDAO(); return TableDAO.instance; }

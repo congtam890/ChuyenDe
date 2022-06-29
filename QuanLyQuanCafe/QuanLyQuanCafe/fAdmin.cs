@@ -16,9 +16,22 @@ namespace QuanLyQuanCafe
     {
         public fAdmin()
         {
-            InitializeComponent();
-            
+           InitializeComponent();
+            LoadBillByDate(dtptFromDate.Value, dtptToDate.Value);
         }
+        #region methods
+        void LoadDateTimePickerBill()
+        {
+            DateTime Today = DateTime.Now;
+            dtptFromDate.Value = new DateTime(Today.Year, Today.Month, 1);
+            dtptToDate.Value = dtptFromDate.Value.AddMonths(1).AddDays(-1);
+        }
+        void LoadBillByDate(DateTime checkIn, DateTime checkOut)
+        {
+            dtgvBill.DataSource = BillDAO.Instance.GetBillListByDate(checkIn , checkOut);
+        }
+        #endregion
+        #region Event
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -50,6 +63,17 @@ namespace QuanLyQuanCafe
         }
 
         private void fAdmin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnViewBill_Click(object sender, EventArgs e)
+        {
+            LoadBillByDate(dtptFromDate.Value, dtptToDate.Value );
+        }
+        #endregion
+
+        private void dtgvBill_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

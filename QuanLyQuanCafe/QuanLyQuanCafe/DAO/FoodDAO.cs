@@ -22,7 +22,7 @@ namespace QuanLyQuanCafe.DAO
         public List<Food> GetFoodByCategoryID(int id)
         {
             List<Food> list = new List<Food> ();
-            string query = "select * from Food where idCategory = " + id;
+            string query = "SELECT * FROM dbo.Food WHERE idCategory = " + id;
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
             foreach(DataRow item in data.Rows)

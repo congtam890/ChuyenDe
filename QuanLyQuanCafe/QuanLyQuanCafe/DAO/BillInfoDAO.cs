@@ -22,7 +22,7 @@ namespace QuanLyQuanCafe.DAO
         {
             List<BillInfo> listBillInfo = new List<BillInfo>();
 
-            DataTable data = DataProvider.Instance.ExecuteQuery("Select * from dbo.BillInfo where idBill="+id );
+            DataTable data = DataProvider.Instance.ExecuteQuery("select * from dbo.BillInfo where idBill=" + id );
 
             foreach(DataRow item in data.Rows)
             {

@@ -13,10 +13,10 @@ namespace QuanLyQuanCafe.DAO
         private static DataProvider instance;// dong goi 
         public static DataProvider Instance
         {
-            get { if (instance == null) instance = new DataProvider();return DataProvider.instance; }
+            get { if (instance == null) instance = new DataProvider(); return DataProvider.instance; }
             private set { DataProvider.instance = value; }
         }
-        private DataProvider(){}
+        private DataProvider() { }
 
         private string connectionSTR = "Data Source=DESKTOP-B3NPLBG;Initial Catalog=QuanLyQuanCafe;Integrated Security=True";
 
@@ -29,23 +29,23 @@ namespace QuanLyQuanCafe.DAO
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
 
-                if(parameter != null)
+                if (parameter != null)
                 {
                     string[] listPara = query.Split(' ');
                     int i = 0;
-                    foreach (string item  in listPara)
+                    foreach (string item in listPara)
                     {
                         if (item.Contains('@'))
                         {
                             command.Parameters.AddWithValue(item, parameter[i]);
                             i++;
-                        }      
-                    }    
+                        }
+                    }
                 }
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 adapter.Fill(data);
                 connection.Close();
-            }    
+            }
 
             return data;
         }

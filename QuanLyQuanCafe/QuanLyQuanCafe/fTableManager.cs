@@ -14,13 +14,14 @@ using static System.Windows.Forms.ListViewItem;
 
 namespace QuanLyQuanCafe
 {
-    public partial class TableManager : Form
+    public partial class fTableManager : Form
     {
-        public TableManager()
+        public fTableManager()
         {
             InitializeComponent();
             LoadTable();
             LoadCategory();
+            LoadComboBoxTable(cbChuyenBan);
         }
         #region Method
         void LoadCategory()
@@ -37,6 +38,7 @@ namespace QuanLyQuanCafe
         }
         void LoadTable()
         {
+            flpTable.Controls.Clear();
             List<Table> tableList = TableDAO.Instance.LoadTableList();
             foreach (Table item in tableList)
             {
@@ -56,29 +58,33 @@ namespace QuanLyQuanCafe
                 flpTable.Controls.Add(btn);
             }
         }
-
         
+        void LoadComboBoxTable(ComboBox cb)
+        {
+            cb.DataSource = TableDAO.Instance.LoadTableList();
+            cb.DisplayMember = "Name";
+        }
         void ShowBill(int id)
         {
             lsvBill.Items.Clear();
-            List<Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
+            List<QuanLyQuanCafe.DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
             float totalPrice = 0;
-            foreach (Menu item in listBillInfo) 
+            foreach (QuanLyQuanCafe.DTO.Menu item in listBillInfo)
             {
                 ListViewItem lsvItem = new ListViewItem(item.FoodName.ToString());
                 lsvItem.SubItems.Add(item.Count.ToString());
                 lsvItem.SubItems.Add(item.Price.ToString());
                 lsvItem.SubItems.Add(item.TotalPrice.ToString());
                 totalPrice += item.TotalPrice;
-                lsvBill.Items.Add(lsvItem); 
+                lsvBill.Items.Add(lsvItem);
             }
-            CultureInfo culture = new CultureInfo("vi-VN");// doi don vi tien te
-            txbTotalPrice.Text = totalPrice.ToString("c", culture);// hien tong tien
+            CultureInfo culture = new CultureInfo("vi-VN");
+            txbTotalPrice.Text = totalPrice.ToString("c", culture);
+
         }
         #endregion
 
         #region Events
-        // show bill
          void Btn_Click(object sender, EventArgs e)
         {
             int tableID = ((sender as Button).Tag as Table).ID;
@@ -151,6 +157,13 @@ namespace QuanLyQuanCafe
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+             int id1 = (lsvBill.Tag as Table).ID;
+            int id2 =   (cbChuyenBan.SelectedItem as Table).ID;
+            if (MessageBox.Show(String.Format("Bạn có muốn chuyển bàn {0} sang bàn {1}", (lsvBill.Tag as Table).Name, (cbChuyenBan.SelectedItem as Table).Name), "Thông báo", MessageBoxButtons.OKCancel)== DialogResult.OK)
+                {
+                TableDAO.Instance.SwitchTable(id1, id2);
+                LoadTable();
+            }
 
         }
 
@@ -179,14 +192,13 @@ namespace QuanLyQuanCafe
         private void btnAddFood_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
-
-            int idBill = BillDAO.Intance.GetUncheckBillIDbyTableID(table.ID);
+            int idBill = BillDAO.Instance.GetUncheckBillIDbyTableID(table.ID);
             int foodID = (cbFood.SelectedItem as Food).ID;
             int count = (int)nmFoodCount.Value;
             if(idBill == -1)
             {
-                BillDAO.Intance.InsertBill(table.ID);
-                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Intance.GetMaxIDBill(), foodID, count);
+                BillDAO.Instance.InsertBill(table.ID);
+                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), foodID, count);
             } 
             else
             {
@@ -194,6 +206,25 @@ namespace QuanLyQuanCafe
             }
             ShowBill(table.ID);
             LoadTable();
+        }
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            Table table = lsvBill.Tag as Table;
+            int idBill = BillDAO.Instance.GetUncheckBillIDbyTableID(table.ID);
+            int discount = (int)nDiscount.Value;
+
+            double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split('.')[0]);
+            double finalTotalPrice = totalPrice - (totalPrice / 100) * discount;
+
+            if (idBill != -1) 
+            {
+                if (MessageBox.Show("Bạn có muốn thanh toán bàn " + table.Name + "\n Tổng tiền là " + finalTotalPrice*1000, "thông báo ", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    BillDAO.Instance.CheckOut(idBill, discount, (float)finalTotalPrice);
+                    ShowBill(table.ID);
+                    LoadTable();
+                }
+            }
         }
         #endregion
 

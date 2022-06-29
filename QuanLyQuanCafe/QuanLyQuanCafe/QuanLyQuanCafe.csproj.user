@@ -10,7 +10,7 @@
     <Compile Update="fLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="TableManager.cs">
+    <Compile Update="fTableManager.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

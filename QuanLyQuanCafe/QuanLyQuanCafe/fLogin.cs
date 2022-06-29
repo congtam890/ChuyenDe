@@ -25,7 +25,7 @@ namespace QuanLyQuanCafe
             string passWord = tbPassword.Text;
             if (Login(userName,passWord))
             {
-                TableManager f = new TableManager();
+                fTableManager f = new fTableManager();
                 this.Hide();
                 f.ShowDialog();
                 this.Show();

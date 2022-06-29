@@ -22,7 +22,7 @@ namespace QuanLyQuanCafe.DAO
         private int iD;
 
         private string name;
-        public int ID { get => iD; set => iD = value; }
-        public string Name { get => name; set => name = value; }
+        public int ID { get { return iD; } set { iD = value; } }
+        public string Name { get { return name; } set { name = value; } }
     }
 }

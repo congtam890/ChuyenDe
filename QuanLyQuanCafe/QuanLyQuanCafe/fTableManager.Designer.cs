@@ -1,6 +1,6 @@
 ﻿namespace QuanLyQuanCafe
 {
-    partial class TableManager
+    partial class fTableManager
     {
         /// <summary>
         /// Required designer variable.
@@ -93,8 +93,7 @@
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Đơn giá";
-            this.columnHeader3.Width = 65;
+            this.columnHeader3.Text = "Giá";
             // 
             // columnHeader4
             // 
@@ -170,6 +169,7 @@
             this.btnThanhToan.TabIndex = 4;
             this.btnThanhToan.Text = "Thanh toán";
             this.btnThanhToan.UseVisualStyleBackColor = true;
+            this.btnThanhToan.Click += new System.EventHandler(this.btnThanhToan_Click);
             // 
             // panel4
             // 
@@ -228,7 +228,7 @@
             this.flpTable.AutoScroll = true;
             this.flpTable.Location = new System.Drawing.Point(12, 30);
             this.flpTable.Name = "flpTable";
-            this.flpTable.Size = new System.Drawing.Size(463, 433);
+            this.flpTable.Size = new System.Drawing.Size(466, 433);
             this.flpTable.TabIndex = 5;
             this.flpTable.Paint += new System.Windows.Forms.PaintEventHandler(this.flpTable_Paint);
             // 
@@ -274,7 +274,7 @@
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
-            // TableManager
+            // fTableManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -284,7 +284,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip2);
-            this.Name = "TableManager";
+            this.Name = "fTableManager";
             this.Text = "Phần mềm quản lý";
             this.Load += new System.EventHandler(this.TableManager_Load);
             this.panel2.ResumeLayout(false);
@@ -314,12 +314,12 @@
         private Button btnChuyenBan;
         private NumericUpDown nDiscount;
         private ComboBox cbChuyenBan;
+        private TextBox txbTotalPrice;
         private ToolStripMenuItem aminToolStripMenuItem;
         private ToolStripMenuItem thôngTinTàiKhoảnToolStripMenuItem;
         private ToolStripMenuItem thôngTinCáNhânToolStripMenuItem;
         private ToolStripMenuItem đăngXuấtToolStripMenuItem;
         private MenuStrip menuStrip2;
-        private TextBox txbTotalPrice;
         private ListView lsvBill;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;

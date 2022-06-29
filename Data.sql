@@ -1,6 +1,63 @@
 ﻿create database QuanLyQuanCafe
 go
-
+ALTER DATABASE [QuanLyQuanCafe] SET ANSI_NULL_DEFAULT OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET ANSI_NULLS OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET ANSI_PADDING OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET ANSI_WARNINGS OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET ARITHABORT OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET AUTO_CLOSE ON
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET AUTO_CREATE_STATISTICS ON
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET AUTO_SHRINK OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET AUTO_UPDATE_STATISTICS ON
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET CURSOR_CLOSE_ON_COMMIT OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET CURSOR_DEFAULT  GLOBAL
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET CONCAT_NULL_YIELDS_NULL OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET NUMERIC_ROUNDABORT OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET QUOTED_IDENTIFIER OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET RECURSIVE_TRIGGERS OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET  ENABLE_BROKER
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET AUTO_UPDATE_STATISTICS_ASYNC OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET DATE_CORRELATION_OPTIMIZATION OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET TRUSTWORTHY OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET ALLOW_SNAPSHOT_ISOLATION OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET PARAMETERIZATION SIMPLE
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET READ_COMMITTED_SNAPSHOT OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET HONOR_BROKER_PRIORITY OFF
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET  READ_WRITE
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET RECOVERY SIMPLE
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET  MULTI_USER
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET PAGE_VERIFY CHECKSUM
+GO
+ALTER DATABASE [QuanLyQuanCafe] SET DB_CHAINING OFF
+GO
+USE [QuanLyQuanCafe]
+GO
 use QuanLyQuanCafe
 go
 
@@ -23,12 +80,12 @@ create table FoodCategory(
 id int identity primary key,
 name nvarchar(100) not null default N'Chưa đặt tên',
 )
-create  table Food
+create  table  Food
 (id int identity primary key,
 name nvarchar(100) not null default N'Chưa đặt tên',
 idCategory int not null,
 price float not null,
-foreign key (idCategory) references dbo.foodcategory(id),
+foreign key (idCategory) references dbo.FoodCategory(id),
 )
 
 create table Bill
@@ -37,9 +94,11 @@ DateCheckIn date not null default getdate(),
 DateCheckOut date,
 idTable int not null,
 status int not null default 0,
+discount int not null,
+totalPrice float,
 foreign key (idTable) references dbo.TableFood(id)
 )
-create  table BillInfo
+create table BillInfo
 (
 id int identity primary key,
 idBill int not null,
@@ -79,18 +138,7 @@ begin
 	insert into dbo.TableFood(name) values (N'Bàn'+ cast(@i as nvarchar(100)))
 	set @i = @i +1
 end
------Bill------
 
-insert into dbo.Bill values (GETDATE(),NULL,1,0);
-insert into dbo.Bill values (GETDATE(),GETDATE(),2,1);
-insert into dbo.Bill values (GETDATE(),NULL,6,0);
-insert into dbo.Bill values (GETDATE(),NULL,4,0);
-insert into dbo.Bill values (GETDATE(),GETDATE(),7,1);
-------Bill info---
-insert into dbo.BillInfo values (1,5,2);
-insert into dbo.BillInfo values (2,8,1);
-insert into dbo.BillInfo values (2,3,1);
-insert into dbo.BillInfo values (3,5,3);
 -------------------
 go
 CREATE PROC dbo.USP_Login
@@ -108,9 +156,6 @@ select * from dbo.Account where UserName=@userName
 end
 go
 
-exec dbo.USP_GetListAccountByUserName @userName = N'nv001'
-
-select * from dbo.Bill where id = 5
 -----------
 create proc USP_GetTableList
 as select * from dbo.TableFood
@@ -118,16 +163,27 @@ go
 
 exec dbo.USP_GetTableList
 
-update dbo.TableFood set status = N'Có người' where id = 9
 
-create proc USP_InsertBill
-@idTable INT
-as
-begin
-	insert into dbo.Bill values(GetDate(),NULL,@idTable,0)
-end
+
 go
-
+CREATE PROC dbo.USP_InsertBill
+@idTable INT
+AS
+BEGIN
+	INSERT	dbo.Bill 
+	        ( DateCheckIn ,
+	          DateCheckOut ,
+	          idTable ,
+	          status,
+	          discount
+	        )
+	VALUES  ( GETDATE() , -- DateCheckIn - date
+	          NULL , -- DateCheckOut - date
+	          @idTable , -- idTable - int
+	          0,  -- status - int
+	          0	  
+	        )
+END
 CREATE PROC USP_InsertBillInfo
 @idBill INT, @idFood INT, @count INT
 AS
@@ -150,8 +206,149 @@ BEGIN
 	END
 	ELSE
 	BEGIN
-		insert into dbo.BillInfo values(@idBill,@idBill,@count)
+		BEGIN
+		INSERT	dbo.BillInfo
+        ( idBill, idFood, count )
+		VALUES  ( @idBill,
+          @idFood, 
+          @count  
+          )
+	END
 	END
 END
 
 
+
+select * from Food
+
+
+------------
+create trigger UTG_UpdateBillInfo
+on dbo.BillInfo for insert, update
+as
+begin
+	declare @idBill int
+	select @idBill = idBill from Inserted
+	declare @idTable int
+	select @idTable = idTable from dbo.Bill where id = @idBill and status = 0
+	update dbo.TableFood set status = N' Có người' where id = @idTable
+end
+go
+---------
+------------
+create trigger UTG_UpdateBill
+on dbo.Bill	 for update
+as
+begin 
+	declare @idBill int
+	select @idBill = id from Inserted
+	declare @idTable int
+	select @idTable = idTable from dbo.Bill where id = @idBill 
+	declare @count int = 0 
+	select @count = count(*) from dbo.Bill where idTable = @idTable and status = 0
+	if(@count =0)
+		update dbo.TableFood set status = N'Trống' where id = @idTable
+end
+go
+select * from Bill
+delete dbo.BillInfo
+delete dbo.Bill
+
+CREATE PROC dbo.USP_SwitchTable
+@idTable1 INT, @idTable2 int
+AS BEGIN
+
+	DECLARE @idFirstBill int
+	DECLARE @idSeconrdBill INT
+	
+	DECLARE @isFirstTablEmty INT = 1
+	DECLARE @isSecondTablEmty INT = 1
+	
+	
+	SELECT @idSeconrdBill = id FROM dbo.Bill WHERE idTable = @idTable2 AND status = 0
+	SELECT @idFirstBill = id FROM dbo.Bill WHERE idTable = @idTable1 AND status = 0
+	
+	PRINT @idFirstBill
+	PRINT @idSeconrdBill
+	PRINT '-----------'
+	
+	IF (@idFirstBill IS NULL)
+	BEGIN
+		PRINT '0000001'
+		INSERT dbo.Bill
+		        ( DateCheckIn ,
+		          DateCheckOut ,
+		          idTable ,
+		          status
+		        )
+		VALUES  ( GETDATE() , -- DateCheckIn - date
+		          NULL , -- DateCheckOut - date
+		          @idTable1 , -- idTable - int
+		          0  -- status - int
+		        )
+		        
+		SELECT @idFirstBill = MAX(id) FROM dbo.Bill WHERE idTable = @idTable1 AND status = 0
+		
+	END
+	
+	SELECT @isFirstTablEmty = COUNT(*) FROM dbo.BillInfo WHERE idBill = @idFirstBill
+	
+	PRINT @idFirstBill
+	PRINT @idSeconrdBill
+	PRINT '-----------'
+	
+	IF (@idSeconrdBill IS NULL)
+	BEGIN
+		PRINT '0000002'
+		INSERT dbo.Bill
+		        ( DateCheckIn ,
+		          DateCheckOut ,
+		          idTable ,
+		          status
+		        )
+		VALUES  ( GETDATE() , -- DateCheckIn - date
+		          NULL , -- DateCheckOut - date
+		          @idTable2 , -- idTable - int
+		          0  -- status - int
+		        )
+		SELECT @idSeconrdBill = MAX(id) FROM dbo.Bill WHERE idTable = @idTable2 AND status = 0
+		
+	END
+	
+	SELECT @isSecondTablEmty = COUNT(*) FROM dbo.BillInfo WHERE idBill = @idSeconrdBill
+	
+	PRINT @idFirstBill
+	PRINT @idSeconrdBill
+	PRINT '-----------'
+
+	SELECT id INTO IDBillInfoTable FROM dbo.BillInfo WHERE idBill = @idSeconrdBill
+	
+	UPDATE dbo.BillInfo SET idBill = @idSeconrdBill WHERE idBill = @idFirstBill
+	
+	UPDATE dbo.BillInfo SET idBill = @idFirstBill WHERE id IN (SELECT * FROM IDBillInfoTable)
+	
+	DROP TABLE IDBillInfoTable
+	
+	IF (@isFirstTablEmty = 0)
+		UPDATE dbo.TableFood SET status = N'Trống' WHERE id = @idTable2
+		
+	IF (@isSecondTablEmty= 0)
+		UPDATE dbo.TableFood SET status = N'Trống' WHERE id = @idTable1
+END
+GO
+--------------------------
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC dbo.USP_GetListBillByDate
+@checkIn date, @checkOut date
+AS 
+BEGIN
+	SELECT t.name AS [Tên bàn], b.totalPrice*1000 AS [Tổng tiền], DateCheckIn AS [Ngày vào], DateCheckOut AS [Ngày ra], discount AS [Giảm giá]
+	FROM dbo.Bill AS b,dbo.TableFood AS t
+	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1
+	AND t.id = b.idTable
+END
+GO
