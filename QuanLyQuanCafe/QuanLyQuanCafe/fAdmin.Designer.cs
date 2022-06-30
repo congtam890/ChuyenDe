@@ -37,7 +37,6 @@
             this.tbDisplayName = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.panel25 = new System.Windows.Forms.Panel();
-            this.cbAccountType = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel23 = new System.Windows.Forms.Panel();
             this.tbUserName = new System.Windows.Forms.TextBox();
@@ -111,6 +110,7 @@
             this.dtptToDate = new System.Windows.Forms.DateTimePicker();
             this.dtptFromDate = new System.Windows.Forms.DateTimePicker();
             this.tcAdmin = new System.Windows.Forms.TabControl();
+            this.tbAccountType = new System.Windows.Forms.TextBox();
             this.tpAccount.SuspendLayout();
             this.panel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).BeginInit();
@@ -229,20 +229,12 @@
             // 
             // panel25
             // 
-            this.panel25.Controls.Add(this.cbAccountType);
+            this.panel25.Controls.Add(this.tbAccountType);
             this.panel25.Controls.Add(this.label11);
             this.panel25.Location = new System.Drawing.Point(4, 122);
             this.panel25.Name = "panel25";
             this.panel25.Size = new System.Drawing.Size(279, 44);
             this.panel25.TabIndex = 5;
-            // 
-            // cbAccountType
-            // 
-            this.cbAccountType.FormattingEnabled = true;
-            this.cbAccountType.Location = new System.Drawing.Point(128, 10);
-            this.cbAccountType.Name = "cbAccountType";
-            this.cbAccountType.Size = new System.Drawing.Size(145, 23);
-            this.cbAccountType.TabIndex = 1;
             // 
             // label11
             // 
@@ -939,6 +931,13 @@
             this.tcAdmin.Size = new System.Drawing.Size(690, 435);
             this.tcAdmin.TabIndex = 0;
             // 
+            // tbAccountType
+            // 
+            this.tbAccountType.Location = new System.Drawing.Point(132, 9);
+            this.tbAccountType.Name = "tbAccountType";
+            this.tbAccountType.Size = new System.Drawing.Size(141, 23);
+            this.tbAccountType.TabIndex = 1;
+            // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1078,7 +1077,6 @@
         private TextBox tbDisplayName;
         private Label label12;
         private Panel panel25;
-        private ComboBox cbAccountType;
         private Label label11;
         private Panel panel23;
         private TextBox tbUserName;
@@ -1088,5 +1086,6 @@
         private Button btnDeleteAccount;
         private Button btnUpdateAccount;
         private Button btnAddAccount;
+        private TextBox tbAccountType;
     }
 }

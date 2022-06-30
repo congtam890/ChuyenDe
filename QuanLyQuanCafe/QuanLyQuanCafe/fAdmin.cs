@@ -32,9 +32,22 @@ namespace QuanLyQuanCafe
             LoadBillByDate(dtptFromDate.Value, dtptToDate.Value);
             LoadDateTimePickerBill();
             LoadListFood();
+            LoadAccount();
             LoadCategoryIntoComboBox(cbCategoryFood);
             AddFoodBinding();
+            AddAcountBinding();
 
+        }
+        void AddAcountBinding()
+        {
+            tbUserName.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "UserName", true, DataSourceUpdateMode.Never));
+            tbDisplayName.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "DisplayName", true, DataSourceUpdateMode.Never));
+            tbAccountType.DataBindings.Add(new Binding("Value", dtgvAccount.DataSource, "Type", true, DataSourceUpdateMode.Never));
+
+        }
+        void LoadAccount()
+        {
+            accountList.DataSource = AccountDAO.Instance.GetListAccount();
         }
         void LoadListFood()
         {
