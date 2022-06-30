@@ -20,8 +20,8 @@ namespace QuanLyQuanCafe.DTO
         {
             this.UserName = row["userName"].ToString();
             this.DisplayName = row["displayName"].ToString();
-            this.Type = (int)row["type"];
             this.Password = row["password"].ToString();
+            this.Type = (int)row["type"];
         }
         private string userName;
         private string password;

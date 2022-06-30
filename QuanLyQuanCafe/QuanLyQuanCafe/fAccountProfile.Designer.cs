@@ -32,16 +32,16 @@
             this.tbLogin = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tbTenHienThi = new System.Windows.Forms.TextBox();
+            this.tbDisplayName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnNewPassword = new System.Windows.Forms.TextBox();
+            this.tbNewPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.btnPassword = new System.Windows.Forms.TextBox();
+            this.tbPassword = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnRePassword = new System.Windows.Forms.TextBox();
+            this.tbRePassword = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
@@ -81,19 +81,19 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.tbTenHienThi);
+            this.panel1.Controls.Add(this.tbDisplayName);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(30, 95);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(494, 47);
             this.panel1.TabIndex = 2;
             // 
-            // tbTenHienThi
+            // tbDisplayName
             // 
-            this.tbTenHienThi.Location = new System.Drawing.Point(206, 13);
-            this.tbTenHienThi.Name = "tbTenHienThi";
-            this.tbTenHienThi.Size = new System.Drawing.Size(272, 23);
-            this.tbTenHienThi.TabIndex = 1;
+            this.tbDisplayName.Location = new System.Drawing.Point(206, 13);
+            this.tbDisplayName.Name = "tbDisplayName";
+            this.tbDisplayName.Size = new System.Drawing.Size(272, 23);
+            this.tbDisplayName.TabIndex = 1;
             // 
             // label2
             // 
@@ -108,20 +108,21 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.btnNewPassword);
+            this.panel3.Controls.Add(this.tbNewPassword);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(30, 201);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(494, 47);
             this.panel3.TabIndex = 3;
             // 
-            // btnNewPassword
+            // tbNewPassword
             // 
-            this.btnNewPassword.Location = new System.Drawing.Point(206, 12);
-            this.btnNewPassword.Name = "btnNewPassword";
-            this.btnNewPassword.Size = new System.Drawing.Size(272, 23);
-            this.btnNewPassword.TabIndex = 1;
-            this.btnNewPassword.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.tbNewPassword.Location = new System.Drawing.Point(206, 12);
+            this.tbNewPassword.Name = "tbNewPassword";
+            this.tbNewPassword.Size = new System.Drawing.Size(272, 23);
+            this.tbNewPassword.TabIndex = 1;
+            this.tbNewPassword.UseSystemPasswordChar = true;
+            this.tbNewPassword.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label3
             // 
@@ -136,19 +137,20 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.btnPassword);
+            this.panel4.Controls.Add(this.tbPassword);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Location = new System.Drawing.Point(30, 148);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(494, 47);
             this.panel4.TabIndex = 3;
             // 
-            // btnPassword
+            // tbPassword
             // 
-            this.btnPassword.Location = new System.Drawing.Point(206, 13);
-            this.btnPassword.Name = "btnPassword";
-            this.btnPassword.Size = new System.Drawing.Size(272, 23);
-            this.btnPassword.TabIndex = 1;
+            this.tbPassword.Location = new System.Drawing.Point(206, 13);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(272, 23);
+            this.tbPassword.TabIndex = 1;
+            this.tbPassword.UseSystemPasswordChar = true;
             // 
             // label4
             // 
@@ -162,19 +164,20 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.btnRePassword);
+            this.panel5.Controls.Add(this.tbRePassword);
             this.panel5.Controls.Add(this.label5);
             this.panel5.Location = new System.Drawing.Point(30, 254);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(494, 47);
             this.panel5.TabIndex = 4;
             // 
-            // btnRePassword
+            // tbRePassword
             // 
-            this.btnRePassword.Location = new System.Drawing.Point(206, 13);
-            this.btnRePassword.Name = "btnRePassword";
-            this.btnRePassword.Size = new System.Drawing.Size(272, 23);
-            this.btnRePassword.TabIndex = 1;
+            this.tbRePassword.Location = new System.Drawing.Point(206, 13);
+            this.tbRePassword.Name = "tbRePassword";
+            this.tbRePassword.Size = new System.Drawing.Size(272, 23);
+            this.tbRePassword.TabIndex = 1;
+            this.tbRePassword.UseSystemPasswordChar = true;
             // 
             // label5
             // 
@@ -243,16 +246,16 @@
         private TextBox tbLogin;
         private Label label1;
         private Panel panel1;
-        private TextBox tbTenHienThi;
+        private TextBox tbDisplayName;
         private Label label2;
         private Panel panel3;
-        private TextBox btnNewPassword;
+        private TextBox tbNewPassword;
         private Label label3;
         private Panel panel4;
-        private TextBox btnPassword;
+        private TextBox tbPassword;
         private Label label4;
         private Panel panel5;
-        private TextBox btnRePassword;
+        private TextBox tbRePassword;
         private Label label5;
         private Button btnUpdate;
         private Button btnExit;

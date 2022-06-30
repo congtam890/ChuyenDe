@@ -47,7 +47,7 @@
             this.cbFood = new System.Windows.Forms.ComboBox();
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
-            this.aminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thôngTinTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thôngTinCáNhânToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.đăngXuấtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -232,12 +232,12 @@
             this.flpTable.TabIndex = 5;
             this.flpTable.Paint += new System.Windows.Forms.PaintEventHandler(this.flpTable_Paint);
             // 
-            // aminToolStripMenuItem
+            // adminToolStripMenuItem
             // 
-            this.aminToolStripMenuItem.Name = "aminToolStripMenuItem";
-            this.aminToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.aminToolStripMenuItem.Text = "Amin";
-            this.aminToolStripMenuItem.Click += new System.EventHandler(this.aminToolStripMenuItem_Click);
+            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.adminToolStripMenuItem.Text = "Amin";
+            this.adminToolStripMenuItem.Click += new System.EventHandler(this.aminToolStripMenuItem_Click);
             // 
             // thôngTinTàiKhoảnToolStripMenuItem
             // 
@@ -266,7 +266,7 @@
             // menuStrip2
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aminToolStripMenuItem,
+            this.adminToolStripMenuItem,
             this.thôngTinTàiKhoảnToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
@@ -315,7 +315,7 @@
         private NumericUpDown nDiscount;
         private ComboBox cbChuyenBan;
         private TextBox txbTotalPrice;
-        private ToolStripMenuItem aminToolStripMenuItem;
+        private ToolStripMenuItem adminToolStripMenuItem;
         private ToolStripMenuItem thôngTinTàiKhoảnToolStripMenuItem;
         private ToolStripMenuItem thôngTinCáNhânToolStripMenuItem;
         private ToolStripMenuItem đăngXuấtToolStripMenuItem;

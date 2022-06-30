@@ -16,14 +16,28 @@ namespace QuanLyQuanCafe
 {
     public partial class fTableManager : Form
     {
-        public fTableManager()
+        private Account loginAccount;
+
+        public Account LoginAccount
+        {
+            get { return loginAccount; }
+            set { loginAccount = value; ChangeAccount(loginAccount.Type); }
+        }
+
+        public fTableManager(Account acc)
         {
             InitializeComponent();
+            this.LoginAccount = acc;
             LoadTable();
             LoadCategory();
             LoadComboBoxTable(cbChuyenBan);
         }
         #region Method
+        void ChangeAccount(int type)
+        {
+            adminToolStripMenuItem.Enabled = type == 1;
+            thôngTinTàiKhoảnToolStripMenuItem.Text += " (" + LoginAccount.DisplayName + ")";
+        }
         void LoadCategory()
         {
             List<Category> listCategory = CategoryDAO.Instance.GetListCategory();
@@ -94,16 +108,40 @@ namespace QuanLyQuanCafe
         
         private void thôngTinCáNhânToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fAccountProfile f = new fAccountProfile();
+            fAccountProfile f = new fAccountProfile(loginAccount);
+            f.UpdateAccount += f_UpdateAccount;
             f.ShowDialog();
         }
 
         private void aminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fAdmin f = new fAdmin();
+            f.InsertFood += f_InsertFood;
+            f.DeleteFood += f_DeleteFood;
+            f.UpdateFood += f_UpdateFood;
             f.ShowDialog();
         }
+        void f_UpdateFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategoryID((cbCategory.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
 
+        void f_DeleteFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategoryID((cbCategory.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
+        }
+
+        void f_InsertFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategoryID((cbCategory.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
         private void flpTable_Paint(object sender, PaintEventArgs e)
         {
 
@@ -113,10 +151,13 @@ namespace QuanLyQuanCafe
         {
 
         }
-
+        void f_UpdateAccount(object sender, AccountEvent e)
+        {
+            thôngTinTàiKhoảnToolStripMenuItem.Text = "Thông tin tài khoản (" + e.Acc.DisplayName + ")";
+        }       
         private void thôngTinTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void TableManager_Load(object sender, EventArgs e)

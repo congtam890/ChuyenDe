@@ -85,7 +85,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.cmCategoryFood = new System.Windows.Forms.ComboBox();
+            this.cbCategoryFood = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
             this.nmFoodPrice = new System.Windows.Forms.NumericUpDown();
@@ -658,6 +658,7 @@
             this.tbFoodID.ReadOnly = true;
             this.tbFoodID.Size = new System.Drawing.Size(177, 23);
             this.tbFoodID.TabIndex = 1;
+            this.tbFoodID.TextChanged += new System.EventHandler(this.tbFoodID_TextChanged);
             // 
             // label1
             // 
@@ -681,20 +682,20 @@
             // 
             // panel10
             // 
-            this.panel10.Controls.Add(this.cmCategoryFood);
+            this.panel10.Controls.Add(this.cbCategoryFood);
             this.panel10.Controls.Add(this.label4);
             this.panel10.Location = new System.Drawing.Point(0, 113);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(283, 44);
             this.panel10.TabIndex = 3;
             // 
-            // cmCategoryFood
+            // cbCategoryFood
             // 
-            this.cmCategoryFood.FormattingEnabled = true;
-            this.cmCategoryFood.Location = new System.Drawing.Point(103, 7);
-            this.cmCategoryFood.Name = "cmCategoryFood";
-            this.cmCategoryFood.Size = new System.Drawing.Size(174, 23);
-            this.cmCategoryFood.TabIndex = 1;
+            this.cbCategoryFood.FormattingEnabled = true;
+            this.cbCategoryFood.Location = new System.Drawing.Point(103, 7);
+            this.cbCategoryFood.Name = "cbCategoryFood";
+            this.cbCategoryFood.Size = new System.Drawing.Size(174, 23);
+            this.cbCategoryFood.TabIndex = 1;
             // 
             // label4
             // 
@@ -788,7 +789,7 @@
             this.btnSearchFood.TabIndex = 4;
             this.btnSearchFood.Text = "Tìm";
             this.btnSearchFood.UseVisualStyleBackColor = true;
-            this.btnSearchFood.Click += new System.EventHandler(this.button1_Click);
+            this.btnSearchFood.Click += new System.EventHandler(this.btnSearchFood_Click);
             // 
             // panel4
             // 
@@ -809,6 +810,7 @@
             this.btnViewFood.TabIndex = 3;
             this.btnViewFood.Text = "Xem";
             this.btnViewFood.UseVisualStyleBackColor = true;
+            this.btnViewFood.Click += new System.EventHandler(this.btnViewFood_Click);
             // 
             // btnDeleteFood
             // 
@@ -818,6 +820,7 @@
             this.btnDeleteFood.TabIndex = 2;
             this.btnDeleteFood.Text = "Xóa";
             this.btnDeleteFood.UseVisualStyleBackColor = true;
+            this.btnDeleteFood.Click += new System.EventHandler(this.btnDeleteFood_Click);
             // 
             // btnUpdateFood
             // 
@@ -827,6 +830,7 @@
             this.btnUpdateFood.TabIndex = 1;
             this.btnUpdateFood.Text = "Sửa";
             this.btnUpdateFood.UseVisualStyleBackColor = true;
+            this.btnUpdateFood.Click += new System.EventHandler(this.btnUpdateFood_Click);
             // 
             // btbAddFood
             // 
@@ -836,6 +840,7 @@
             this.btbAddFood.TabIndex = 0;
             this.btbAddFood.Text = "Thêm";
             this.btbAddFood.UseVisualStyleBackColor = true;
+            this.btbAddFood.Click += new System.EventHandler(this.btbAddFood_Click);
             // 
             // panel3
             // 
@@ -1063,7 +1068,7 @@
         private Button btnDeleteCategory;
         private Button btnUpdateCategory;
         private Button btnAddCategory;
-        private ComboBox cmCategoryFood;
+        private ComboBox cbCategoryFood;
         private NumericUpDown nmFoodPrice;
         private Panel panel21;
         private DataGridView dtgvAccount;

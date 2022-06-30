@@ -352,3 +352,44 @@ BEGIN
 	AND t.id = b.idTable
 END
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC dbo.USP_UpdateAccount
+@userName VARCHAR(100), @displayName NVARCHAR(100), @password VARCHAR(100), @newPassword VARCHAR(100)
+AS
+BEGIN
+	DECLARE @isRightPass INT = 0
+	
+	SELECT @isRightPass = COUNT(*) FROM dbo.Account WHERE USERName = @userName AND PassWord = @password
+	
+	IF (@isRightPass = 1)
+	BEGIN
+		IF (@newPassword = NULL OR @newPassword = '')
+		BEGIN
+			UPDATE dbo.Account SET DisplayName = @displayName WHERE UserName = @userName
+		END		
+		ELSE
+			UPDATE dbo.Account SET DisplayName = @displayName, PassWord = @newPassword WHERE UserName = @userName
+	end
+END
+GO
+
+create trigger UTG_DeleteBillInfo
+on dbo.BillInfo for delete
+as
+begin
+	declare @idBillInfo int
+	declare @idBill int
+	select @idBillInfo = id, @idBill = deleted.idBill from deleted
+	
+	declare @idTable int
+	select @idTable = idTable from dbo.Bill where id = @idBill
+	declare @count int = 0
+	select @count = count(*) from dbo.BillInfo as bi, dbo.Bill as b where b.id = bi.idBill and b.id = @idBill and status = 0
+	
+	if(@count = 0)
+		update dbo.TableFood set status = N'Trống' where id=@idTable
+end
