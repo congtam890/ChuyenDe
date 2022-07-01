@@ -123,6 +123,7 @@ namespace QuanLyQuanCafe
             f.UpdateFood += f_UpdateFood;
             f.ShowDialog();
         }
+
         void f_UpdateFood(object sender, EventArgs e)
         {
             LoadFoodListByCategoryID((cbCategory.SelectedItem as Category).ID);

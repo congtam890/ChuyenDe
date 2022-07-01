@@ -68,11 +68,11 @@
             this.panel17 = new System.Windows.Forms.Panel();
             this.dtgvCategory = new System.Windows.Forms.DataGridView();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbNameCategory = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel18 = new System.Windows.Forms.Panel();
-            this.tabCategoryID = new System.Windows.Forms.TextBox();
+            this.tbCategoryID = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.panel16 = new System.Windows.Forms.Panel();
             this.btnShowCategory = new System.Windows.Forms.Button();
@@ -104,6 +104,11 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.dtgvFood = new System.Windows.Forms.DataGridView();
             this.tpBill = new System.Windows.Forms.TabPage();
+            this.tbBillPage = new System.Windows.Forms.TextBox();
+            this.btnNextPage = new System.Windows.Forms.Button();
+            this.btnPrevioursPage = new System.Windows.Forms.Button();
+            this.btnLastPage = new System.Windows.Forms.Button();
+            this.btnFirstPage = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dtgvBill = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -111,11 +116,6 @@
             this.dtpkToDate = new System.Windows.Forms.DateTimePicker();
             this.dtpkFromDate = new System.Windows.Forms.DateTimePicker();
             this.tcAdmin = new System.Windows.Forms.TabControl();
-            this.btnFirstPage = new System.Windows.Forms.Button();
-            this.btnLastPage = new System.Windows.Forms.Button();
-            this.btnPrevioursPage = new System.Windows.Forms.Button();
-            this.btnNextPage = new System.Windows.Forms.Button();
-            this.tbBillPage = new System.Windows.Forms.TextBox();
             this.tpAccount.SuspendLayout();
             this.panel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).BeginInit();
@@ -186,6 +186,7 @@
             this.dtgvAccount.RowTemplate.Height = 25;
             this.dtgvAccount.Size = new System.Drawing.Size(375, 322);
             this.dtgvAccount.TabIndex = 0;
+            this.dtgvAccount.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvAccount_CellContentClick);
             // 
             // panel22
             // 
@@ -245,6 +246,11 @@
             // nmAccountType
             // 
             this.nmAccountType.Location = new System.Drawing.Point(132, 9);
+            this.nmAccountType.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nmAccountType.Name = "nmAccountType";
             this.nmAccountType.Size = new System.Drawing.Size(141, 23);
             this.nmAccountType.TabIndex = 1;
@@ -272,9 +278,9 @@
             // 
             this.tbUserName.Location = new System.Drawing.Point(128, 9);
             this.tbUserName.Name = "tbUserName";
-            this.tbUserName.ReadOnly = true;
             this.tbUserName.Size = new System.Drawing.Size(145, 23);
             this.tbUserName.TabIndex = 1;
+            this.tbUserName.TextChanged += new System.EventHandler(this.tbUserName_TextChanged);
             // 
             // label10
             // 
@@ -368,6 +374,7 @@
             this.BtnShowTable.TabIndex = 3;
             this.BtnShowTable.Text = "Xem";
             this.BtnShowTable.UseVisualStyleBackColor = true;
+            this.BtnShowTable.Click += new System.EventHandler(this.BtnShowTable_Click);
             // 
             // btnDeleteTable
             // 
@@ -529,19 +536,19 @@
             // 
             // panel12
             // 
-            this.panel12.Controls.Add(this.textBox2);
+            this.panel12.Controls.Add(this.tbNameCategory);
             this.panel12.Controls.Add(this.label3);
             this.panel12.Location = new System.Drawing.Point(395, 136);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(279, 44);
             this.panel12.TabIndex = 3;
             // 
-            // textBox2
+            // tbNameCategory
             // 
-            this.textBox2.Location = new System.Drawing.Point(103, 9);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(174, 23);
-            this.textBox2.TabIndex = 1;
+            this.tbNameCategory.Location = new System.Drawing.Point(103, 9);
+            this.tbNameCategory.Name = "tbNameCategory";
+            this.tbNameCategory.Size = new System.Drawing.Size(174, 23);
+            this.tbNameCategory.TabIndex = 1;
             // 
             // label3
             // 
@@ -563,20 +570,21 @@
             // 
             // panel18
             // 
-            this.panel18.Controls.Add(this.tabCategoryID);
+            this.panel18.Controls.Add(this.tbCategoryID);
             this.panel18.Controls.Add(this.label8);
             this.panel18.Location = new System.Drawing.Point(4, 13);
             this.panel18.Name = "panel18";
             this.panel18.Size = new System.Drawing.Size(277, 44);
             this.panel18.TabIndex = 4;
             // 
-            // tabCategoryID
+            // tbCategoryID
             // 
-            this.tabCategoryID.Location = new System.Drawing.Point(99, 9);
-            this.tabCategoryID.Name = "tabCategoryID";
-            this.tabCategoryID.ReadOnly = true;
-            this.tabCategoryID.Size = new System.Drawing.Size(174, 23);
-            this.tabCategoryID.TabIndex = 1;
+            this.tbCategoryID.Location = new System.Drawing.Point(99, 9);
+            this.tbCategoryID.Name = "tbCategoryID";
+            this.tbCategoryID.ReadOnly = true;
+            this.tbCategoryID.Size = new System.Drawing.Size(174, 23);
+            this.tbCategoryID.TabIndex = 1;
+            this.tbCategoryID.TextChanged += new System.EventHandler(this.tbCategoryID_TextChanged);
             // 
             // label8
             // 
@@ -607,6 +615,7 @@
             this.btnShowCategory.TabIndex = 3;
             this.btnShowCategory.Text = "Xem";
             this.btnShowCategory.UseVisualStyleBackColor = true;
+            this.btnShowCategory.Click += new System.EventHandler(this.btnShowCategory_Click);
             // 
             // btnDeleteCategory
             // 
@@ -616,6 +625,7 @@
             this.btnDeleteCategory.TabIndex = 2;
             this.btnDeleteCategory.Text = "Xóa";
             this.btnDeleteCategory.UseVisualStyleBackColor = true;
+            this.btnDeleteCategory.Click += new System.EventHandler(this.btnDeleteCategory_Click_1);
             // 
             // btnUpdateCategory
             // 
@@ -625,6 +635,7 @@
             this.btnUpdateCategory.TabIndex = 1;
             this.btnUpdateCategory.Text = "Sửa";
             this.btnUpdateCategory.UseVisualStyleBackColor = true;
+            this.btnUpdateCategory.Click += new System.EventHandler(this.btnUpdateCategory_Click_1);
             // 
             // btnAddCategory
             // 
@@ -634,6 +645,7 @@
             this.btnAddCategory.TabIndex = 0;
             this.btnAddCategory.Text = "Thêm";
             this.btnAddCategory.UseVisualStyleBackColor = true;
+            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click_1);
             // 
             // tpFood
             // 
@@ -704,6 +716,7 @@
             this.cbCategoryFood.Name = "cbCategoryFood";
             this.cbCategoryFood.Size = new System.Drawing.Size(174, 23);
             this.cbCategoryFood.TabIndex = 1;
+            this.cbCategoryFood.SelectedIndexChanged += new System.EventHandler(this.cbCategoryFood_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -885,6 +898,55 @@
             this.tpBill.UseVisualStyleBackColor = true;
             this.tpBill.Click += new System.EventHandler(this.tpBill_Click);
             // 
+            // tbBillPage
+            // 
+            this.tbBillPage.Location = new System.Drawing.Point(298, 378);
+            this.tbBillPage.Name = "tbBillPage";
+            this.tbBillPage.ReadOnly = true;
+            this.tbBillPage.Size = new System.Drawing.Size(75, 23);
+            this.tbBillPage.TabIndex = 6;
+            this.tbBillPage.TextChanged += new System.EventHandler(this.tbBillByPage_TextChanged);
+            // 
+            // btnNextPage
+            // 
+            this.btnNextPage.Location = new System.Drawing.Point(518, 378);
+            this.btnNextPage.Name = "btnNextPage";
+            this.btnNextPage.Size = new System.Drawing.Size(75, 23);
+            this.btnNextPage.TabIndex = 5;
+            this.btnNextPage.Text = "Trang tiếp theo";
+            this.btnNextPage.UseVisualStyleBackColor = true;
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
+            // 
+            // btnPrevioursPage
+            // 
+            this.btnPrevioursPage.Location = new System.Drawing.Point(87, 378);
+            this.btnPrevioursPage.Name = "btnPrevioursPage";
+            this.btnPrevioursPage.Size = new System.Drawing.Size(75, 23);
+            this.btnPrevioursPage.TabIndex = 4;
+            this.btnPrevioursPage.Text = "Trang trước";
+            this.btnPrevioursPage.UseVisualStyleBackColor = true;
+            this.btnPrevioursPage.Click += new System.EventHandler(this.btnPrevioursPage_Click);
+            // 
+            // btnLastPage
+            // 
+            this.btnLastPage.Location = new System.Drawing.Point(599, 378);
+            this.btnLastPage.Name = "btnLastPage";
+            this.btnLastPage.Size = new System.Drawing.Size(75, 23);
+            this.btnLastPage.TabIndex = 3;
+            this.btnLastPage.Text = "Trang cuối";
+            this.btnLastPage.UseVisualStyleBackColor = true;
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
+            // 
+            // btnFirstPage
+            // 
+            this.btnFirstPage.Location = new System.Drawing.Point(3, 378);
+            this.btnFirstPage.Name = "btnFirstPage";
+            this.btnFirstPage.Size = new System.Drawing.Size(75, 23);
+            this.btnFirstPage.TabIndex = 2;
+            this.btnFirstPage.Text = "Trang đầu";
+            this.btnFirstPage.UseVisualStyleBackColor = true;
+            this.btnFirstPage.Click += new System.EventHandler(this.btnFirstPage_Click);
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.dtgvBill);
@@ -951,55 +1013,6 @@
             this.tcAdmin.SelectedIndex = 0;
             this.tcAdmin.Size = new System.Drawing.Size(690, 435);
             this.tcAdmin.TabIndex = 0;
-            // 
-            // btnFirstPage
-            // 
-            this.btnFirstPage.Location = new System.Drawing.Point(3, 378);
-            this.btnFirstPage.Name = "btnFirstPage";
-            this.btnFirstPage.Size = new System.Drawing.Size(75, 23);
-            this.btnFirstPage.TabIndex = 2;
-            this.btnFirstPage.Text = "Trang đầu";
-            this.btnFirstPage.UseVisualStyleBackColor = true;
-            this.btnFirstPage.Click += new System.EventHandler(this.btnFirstPage_Click);
-            // 
-            // btnLastPage
-            // 
-            this.btnLastPage.Location = new System.Drawing.Point(599, 378);
-            this.btnLastPage.Name = "btnLastPage";
-            this.btnLastPage.Size = new System.Drawing.Size(75, 23);
-            this.btnLastPage.TabIndex = 3;
-            this.btnLastPage.Text = "Trang cuối";
-            this.btnLastPage.UseVisualStyleBackColor = true;
-            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
-            // 
-            // btnPrevioursPage
-            // 
-            this.btnPrevioursPage.Location = new System.Drawing.Point(87, 378);
-            this.btnPrevioursPage.Name = "btnPrevioursPage";
-            this.btnPrevioursPage.Size = new System.Drawing.Size(75, 23);
-            this.btnPrevioursPage.TabIndex = 4;
-            this.btnPrevioursPage.Text = "Trang trước";
-            this.btnPrevioursPage.UseVisualStyleBackColor = true;
-            this.btnPrevioursPage.Click += new System.EventHandler(this.btnPrevioursPage_Click);
-            // 
-            // btnNextPage
-            // 
-            this.btnNextPage.Location = new System.Drawing.Point(518, 378);
-            this.btnNextPage.Name = "btnNextPage";
-            this.btnNextPage.Size = new System.Drawing.Size(75, 23);
-            this.btnNextPage.TabIndex = 5;
-            this.btnNextPage.Text = "Trang tiếp theo";
-            this.btnNextPage.UseVisualStyleBackColor = true;
-            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
-            // 
-            // tbBillPage
-            // 
-            this.tbBillPage.Location = new System.Drawing.Point(298, 378);
-            this.tbBillPage.Name = "tbBillPage";
-            this.tbBillPage.ReadOnly = true;
-            this.tbBillPage.Size = new System.Drawing.Size(75, 23);
-            this.tbBillPage.TabIndex = 6;
-            this.tbBillPage.TextChanged += new System.EventHandler(this.tbBillByPage_TextChanged);
             // 
             // fAdmin
             // 
@@ -1121,11 +1134,11 @@
         private Panel panel17;
         private DataGridView dtgvCategory;
         private Panel panel12;
-        private TextBox textBox2;
+        private TextBox tbNameCategory;
         private Label label3;
         private Panel panel9;
         private Panel panel18;
-        private TextBox tabCategoryID;
+        private TextBox tbCategoryID;
         private Label label8;
         private Panel panel16;
         private Button btnShowCategory;

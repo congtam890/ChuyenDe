@@ -56,8 +56,6 @@ ALTER DATABASE [QuanLyQuanCafe] SET PAGE_VERIFY CHECKSUM
 GO
 ALTER DATABASE [QuanLyQuanCafe] SET DB_CHAINING OFF
 GO
-USE [QuanLyQuanCafe]
-GO
 use QuanLyQuanCafe
 go
 
@@ -68,6 +66,11 @@ name nvarchar(100)not null default N'Bàn chưa có tên',
 status nvarchar(50) not null default N'Trống',
 )
 go
+create table AccountType
+(type int primary key not null,
+name nvarchar(100) not null default N'Nhân viên'
+)
+go
 create table Account 
 (
 UserName varchar(32) not null primary key,
@@ -76,23 +79,19 @@ displayname nvarchar(100) not null,
 type int not null default 0,
 foreign key (type) references dbo.AccountType(type),
 )
-create table AccountType
-(type int primary key not null,
-name nvarchar(100) not null default N'Nhân viên'
-)
 go
-create table FoodCategory(
+create table FoodCategory
+(
 id int identity primary key,
 name nvarchar(100) not null default N'Chưa đặt tên',
 )
-create  table  Food
+create table  Food
 (id int identity primary key,
 name nvarchar(100) not null default N'Chưa đặt tên',
 idCategory int not null,
 price float not null,
 foreign key (idCategory) references dbo.FoodCategory(id),
 )
-
 create table Bill
 (id int identity primary key,
 DateCheckIn date not null default getdate(),
@@ -112,13 +111,14 @@ count int not null default 0,
 foreign key (idBill) references dbo.Bill(id),
 foreign key (idFood) references dbo.Food(id)
 )
+---------------
+insert into dbo.AccountType values(1,N'Admin');
+insert into dbo.AccountType values(0,N'Nhân viên')
 ------------tai khoan---------
 insert into dbo.Account values ('admin','1234','Admin',1);
 insert into dbo.Account values ('nv001','1234',N'Nhân viên 1',0);
 insert into dbo.Account values ('nv002','1234',N'Nhân viên 2',0);
----------------
-insert into dbo.AccountType values(1,N'Admin');
-insert into dbo.AccountType values(0,N'Nhân viên')
+
 -----------Loai-----------
 insert into dbo.FoodCategory values(N'Cafe');
 insert into dbo.FoodCategory values(N'Trà sửa');
@@ -168,9 +168,6 @@ go
 create proc USP_GetTableList
 as select * from dbo.TableFood
 go
-
-exec dbo.USP_GetTableList
-
 
 
 go
@@ -226,10 +223,6 @@ BEGIN
 END
 
 
-
-select * from Food
-
-
 ------------
 create trigger UTG_UpdateBillInfo
 on dbo.BillInfo for insert, update
@@ -258,9 +251,7 @@ begin
 		update dbo.TableFood set status = N'Trống' where id = @idTable
 end
 go
-select * from Bill
-delete dbo.BillInfo
-delete dbo.Bill
+
 
 CREATE PROC dbo.USP_SwitchTable
 @idTable1 INT, @idTable2 int

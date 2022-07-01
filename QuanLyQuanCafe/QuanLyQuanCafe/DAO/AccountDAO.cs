@@ -28,7 +28,7 @@ namespace QuanLyQuanCafe.DAO
         }
         public bool InsertAccount(string name, string displayName, int type)
         {
-            string query = string.Format("INSERT dbo.Account ( UserName, DisplayName, Type, password )VALUES  ( N'{0}', N'{1}', {2}, N'{3}')", name, displayName, type, "1962026656160185351301320480154111117132155");
+            string query = string.Format("INSERT dbo.Account ( UserName, DisplayName, Type, password )VALUES  ( N'{0}', N'{1}', {2}, N'{3}')", name, displayName, type, "1");
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;
@@ -51,7 +51,7 @@ namespace QuanLyQuanCafe.DAO
         }
         public bool ResetPassword(string name)
         {
-            string query = string.Format("update account set password = N'1' where UserName = N'{0}'", name);
+            string query = string.Format("update account set password = N'1' where UserName = {0}", name);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;

@@ -47,5 +47,28 @@ namespace QuanLyQuanCafe.DAO
 
             return category;
         }
+        public bool InsertCategory( string nameCategory)
+        {
+            string query = string.Format("INSERT dbo.FoodCategory ( name )VALUES  ( N'{0}')", nameCategory);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool UpdateCategory(int idcategory, string nameCategory)
+        {
+            string query = string.Format("UPDATE dbo.FoodCategory SET name = N'{1}' WHERE id = N'{0}'", idcategory, nameCategory);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool DeleteCategory(int idcategory)
+        {
+            string query = string.Format("Delete Category where id = N'{0}'", idcategory);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
     }
 }
