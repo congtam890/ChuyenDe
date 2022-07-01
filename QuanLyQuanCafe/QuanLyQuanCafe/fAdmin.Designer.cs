@@ -905,6 +905,8 @@
             this.tbBillPage.ReadOnly = true;
             this.tbBillPage.Size = new System.Drawing.Size(75, 23);
             this.tbBillPage.TabIndex = 6;
+            this.tbBillPage.Text = "1";
+            this.tbBillPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbBillPage.TextChanged += new System.EventHandler(this.tbBillByPage_TextChanged);
             // 
             // btnNextPage
