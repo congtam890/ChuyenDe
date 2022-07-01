@@ -1,5 +1,6 @@
 ﻿using QuanLyQuanCafe.DAO;
 using QuanLyQuanCafe.DTO;
+using System.Security.Cryptography;
 
 namespace QuanLyQuanCafe
 {

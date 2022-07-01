@@ -81,9 +81,9 @@ namespace QuanLyQuanCafe
         void ShowBill(int id)
         {
             lsvBill.Items.Clear();
-            List<QuanLyQuanCafe.DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
+            List<Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
             float totalPrice = 0;
-            foreach (QuanLyQuanCafe.DTO.Menu item in listBillInfo)
+            foreach (Menu item in listBillInfo)
             {
                 ListViewItem lsvItem = new ListViewItem(item.FoodName.ToString());
                 lsvItem.SubItems.Add(item.Count.ToString());
@@ -93,13 +93,14 @@ namespace QuanLyQuanCafe
                 lsvBill.Items.Add(lsvItem);
             }
             CultureInfo culture = new CultureInfo("vi-VN");
+
             txbTotalPrice.Text = totalPrice.ToString("c", culture);
 
         }
         #endregion
 
         #region Events
-         void Btn_Click(object sender, EventArgs e)
+        void Btn_Click(object sender, EventArgs e)
         {
             int tableID = ((sender as Button).Tag as Table).ID;
             lsvBill.Tag = (sender as Button).Tag;
@@ -116,6 +117,7 @@ namespace QuanLyQuanCafe
         private void aminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fAdmin f = new fAdmin();
+            f.loginAccount = LoginAccount;
             f.InsertFood += f_InsertFood;
             f.DeleteFood += f_DeleteFood;
             f.UpdateFood += f_UpdateFood;
@@ -198,13 +200,6 @@ namespace QuanLyQuanCafe
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-             int id1 = (lsvBill.Tag as Table).ID;
-            int id2 =   (cbChuyenBan.SelectedItem as Table).ID;
-            if (MessageBox.Show(String.Format("Bạn có muốn chuyển bàn {0} sang bàn {1}", (lsvBill.Tag as Table).Name, (cbChuyenBan.SelectedItem as Table).Name), "Thông báo", MessageBoxButtons.OKCancel)== DialogResult.OK)
-                {
-                TableDAO.Instance.SwitchTable(id1, id2);
-                LoadTable();
-            }
 
         }
 
@@ -266,6 +261,27 @@ namespace QuanLyQuanCafe
                     LoadTable();
                 }
             }
+        }
+        private void thanhToánToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnThanhToan_Click(this, new EventArgs());
+        }
+
+        private void chuyểnBànToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnSwitchTable_Click_1(this,new EventArgs() );
+        }
+        private void btnSwitchTable_Click_1(object sender, EventArgs e)
+        {
+
+            int id1 = (lsvBill.Tag as Table).ID;
+            int id2 = (cbChuyenBan.SelectedItem as Table).ID;
+            if (MessageBox.Show(String.Format("Bạn có muốn chuyển bàn {0} sang bàn {1}", (lsvBill.Tag as Table).Name, (cbChuyenBan.SelectedItem as Table).Name), "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                TableDAO.Instance.SwitchTable(id1, id2);
+                LoadTable();
+            }
+
         }
         #endregion
 

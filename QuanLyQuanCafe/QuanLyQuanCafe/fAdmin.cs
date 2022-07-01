@@ -18,6 +18,8 @@ namespace QuanLyQuanCafe
         BindingSource foodList = new BindingSource();
 
         BindingSource accountList = new BindingSource();
+
+        public Account loginAccount;
         public fAdmin()
         {
            InitializeComponent();
@@ -29,7 +31,7 @@ namespace QuanLyQuanCafe
             dtgvFood.DataSource = foodList;
             dtgvAccount.DataSource = accountList;
 
-            LoadBillByDate(dtptFromDate.Value, dtptToDate.Value);
+            LoadBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
             LoadDateTimePickerBill();
             LoadListFood();
             LoadAccount();
@@ -42,8 +44,21 @@ namespace QuanLyQuanCafe
         {
             tbUserName.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "UserName", true, DataSourceUpdateMode.Never));
             tbDisplayName.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "DisplayName", true, DataSourceUpdateMode.Never));
-            tbAccountType.DataBindings.Add(new Binding("Value", dtgvAccount.DataSource, "Type", true, DataSourceUpdateMode.Never));
+            nmAccountType.DataBindings.Add(new Binding("Value", dtgvAccount.DataSource, "Type", true, DataSourceUpdateMode.Never));
 
+        }
+        void AddAccount(string userName, string displayName, int type)
+        {
+            if (AccountDAO.Instance.InsertAccount(userName, displayName, type))
+            {
+                MessageBox.Show("Thêm tài khoản thành công");
+            }
+            else
+            {
+                MessageBox.Show("Thêm tài khoản thất bại");
+            }
+
+            LoadAccount();
         }
         void LoadAccount()
         {
@@ -67,8 +82,8 @@ namespace QuanLyQuanCafe
         void LoadDateTimePickerBill()
         {
             DateTime Today = DateTime.Now;
-            dtptFromDate.Value = new DateTime(Today.Year, Today.Month, 1);
-            dtptToDate.Value = dtptFromDate.Value.AddMonths(1).AddDays(-1);
+            dtpkFromDate.Value = new DateTime(Today.Year, Today.Month, 1);
+            dtpkToDate.Value = dtpkFromDate.Value.AddMonths(1).AddDays(-1);
         }
         List<Food> SearchFoodByName(string name)    
         {
@@ -79,6 +94,50 @@ namespace QuanLyQuanCafe
         void LoadBillByDate(DateTime checkIn, DateTime checkOut)
         {
             dtgvBill.DataSource = BillDAO.Instance.GetBillListByDate(checkIn , checkOut);
+        }
+
+        void EditAccount(string userName, string displayName, int type)
+        {
+            if (AccountDAO.Instance.UpdateAccount(userName, displayName, type))
+            {
+                MessageBox.Show("Cập nhật tài khoản thành công");
+            }
+            else
+            {
+                MessageBox.Show("Cập nhật tài khoản thất bại");
+            }
+
+            LoadAccount();
+        }
+
+        void DeleteAccount(string userName)
+        {
+            if (loginAccount.UserName.Equals(userName))
+            {
+                MessageBox.Show("Vui lòng đừng xóa chính bạn chứ");
+                return;
+            }
+            if (AccountDAO.Instance.DeleteAccount(userName))
+            {
+                MessageBox.Show("Xóa tài khoản thành công");
+            }
+            else
+            {
+                MessageBox.Show("Xóa tài khoản thất bại");
+            }
+
+            LoadAccount();
+        }
+        void ResetPass(string userName)
+        {
+            if (AccountDAO.Instance.ResetPassword(userName))
+            {
+                MessageBox.Show("Đặt lại mật khẩu thành công");
+            }
+            else
+            {
+                MessageBox.Show("Đặt lại mật khẩu thất bại");
+            }
         }
         #endregion
         #region Event
@@ -152,7 +211,7 @@ namespace QuanLyQuanCafe
 
         private void btnViewBill_Click(object sender, EventArgs e)
         {
-            LoadBillByDate(dtptFromDate.Value, dtptToDate.Value );
+            LoadBillByDate(dtpkFromDate.Value, dtpkToDate.Value );
         }
 
         private void btbAddFood_Click(object sender, EventArgs e)
@@ -231,6 +290,73 @@ namespace QuanLyQuanCafe
         private void btnSearchFood_Click(object sender, EventArgs e)
         {
             foodList.DataSource = SearchFoodByName(txbSearchFoodName.Text);
+        }
+        private void btnAddAccount_Click(object sender, EventArgs e)
+        {
+            string userName = tbUserName.Text;
+            string displayName = tbDisplayName.Text;
+            int type = (int)nmAccountType.Value;
+
+            AddAccount(userName, displayName, type);
+        }
+
+        private void btnUpdateAccount_Click(object sender, EventArgs e)
+        {
+            string userName = tbUserName.Text;
+            string displayName = tbDisplayName.Text;
+            int type = (int)nmAccountType.Value;
+
+            EditAccount(userName, displayName, type);
+        }
+
+        private void btnDeleteAccount_Click(object sender, EventArgs e)
+        {
+            string userName = tbUserName.Text;
+
+            DeleteAccount(userName);
+        }
+        private void btnFirstPage_Click(object sender, EventArgs e)
+        {
+            tbBillPage.Text = "1";
+        }
+
+        private void btnLastPage_Click(object sender, EventArgs e)
+        {
+            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkFromDate.Value, dtpkToDate.Value);
+
+            int lastPage = sumRecord / 10;
+
+            if (sumRecord % 10 != 0)
+                lastPage++;
+
+            tbBillPage.Text = lastPage.ToString();
+        }
+
+        private void btnPrevioursPage_Click(object sender, EventArgs e)
+        {
+            int page = Convert.ToInt32(tbBillPage.Text);
+
+            if (page > 1)
+                page--;
+
+            tbBillPage.Text = page.ToString();
+        }
+
+        private void btnNextPage_Click(object sender, EventArgs e)
+        {
+            int page = Convert.ToInt32(tbBillPage.Text);
+            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkFromDate.Value, dtpkToDate.Value);
+
+            if (page < sumRecord)
+                page++;
+
+            tbBillPage.Text = page.ToString();
+        }
+
+        private void tbBillByPage_TextChanged(object sender, EventArgs e)
+        {
+            dtgvBill.DataSource = BillDAO.Instance.GetBillListByDateAndPage(dtpkFromDate.Value, dtpkToDate.Value, Convert.ToInt32(tbBillPage.Text));
+
         }
         #endregion
 

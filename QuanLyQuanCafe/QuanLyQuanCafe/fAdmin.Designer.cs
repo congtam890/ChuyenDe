@@ -37,6 +37,7 @@
             this.tbDisplayName = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.panel25 = new System.Windows.Forms.Panel();
+            this.nmAccountType = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.panel23 = new System.Windows.Forms.Panel();
             this.tbUserName = new System.Windows.Forms.TextBox();
@@ -107,16 +108,21 @@
             this.dtgvBill = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnViewBill = new System.Windows.Forms.Button();
-            this.dtptToDate = new System.Windows.Forms.DateTimePicker();
-            this.dtptFromDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpkToDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpkFromDate = new System.Windows.Forms.DateTimePicker();
             this.tcAdmin = new System.Windows.Forms.TabControl();
-            this.tbAccountType = new System.Windows.Forms.TextBox();
+            this.btnFirstPage = new System.Windows.Forms.Button();
+            this.btnLastPage = new System.Windows.Forms.Button();
+            this.btnPrevioursPage = new System.Windows.Forms.Button();
+            this.btnNextPage = new System.Windows.Forms.Button();
+            this.tbBillPage = new System.Windows.Forms.TextBox();
             this.tpAccount.SuspendLayout();
             this.panel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).BeginInit();
             this.panel22.SuspendLayout();
             this.panel26.SuspendLayout();
             this.panel25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmAccountType)).BeginInit();
             this.panel23.SuspendLayout();
             this.panel24.SuspendLayout();
             this.tpTable.SuspendLayout();
@@ -229,12 +235,19 @@
             // 
             // panel25
             // 
-            this.panel25.Controls.Add(this.tbAccountType);
+            this.panel25.Controls.Add(this.nmAccountType);
             this.panel25.Controls.Add(this.label11);
             this.panel25.Location = new System.Drawing.Point(4, 122);
             this.panel25.Name = "panel25";
             this.panel25.Size = new System.Drawing.Size(279, 44);
             this.panel25.TabIndex = 5;
+            // 
+            // nmAccountType
+            // 
+            this.nmAccountType.Location = new System.Drawing.Point(132, 9);
+            this.nmAccountType.Name = "nmAccountType";
+            this.nmAccountType.Size = new System.Drawing.Size(141, 23);
+            this.nmAccountType.TabIndex = 1;
             // 
             // label11
             // 
@@ -301,6 +314,7 @@
             this.btnDeleteAccount.TabIndex = 2;
             this.btnDeleteAccount.Text = "Xóa";
             this.btnDeleteAccount.UseVisualStyleBackColor = true;
+            this.btnDeleteAccount.Click += new System.EventHandler(this.btnDeleteAccount_Click);
             // 
             // btnUpdateAccount
             // 
@@ -310,6 +324,7 @@
             this.btnUpdateAccount.TabIndex = 1;
             this.btnUpdateAccount.Text = "Sửa";
             this.btnUpdateAccount.UseVisualStyleBackColor = true;
+            this.btnUpdateAccount.Click += new System.EventHandler(this.btnUpdateAccount_Click);
             // 
             // btnAddAccount
             // 
@@ -319,6 +334,7 @@
             this.btnAddAccount.TabIndex = 0;
             this.btnAddAccount.Text = "Thêm";
             this.btnAddAccount.UseVisualStyleBackColor = true;
+            this.btnAddAccount.Click += new System.EventHandler(this.btnAddAccount_Click);
             // 
             // tpTable
             // 
@@ -853,6 +869,11 @@
             // 
             // tpBill
             // 
+            this.tpBill.Controls.Add(this.tbBillPage);
+            this.tpBill.Controls.Add(this.btnNextPage);
+            this.tpBill.Controls.Add(this.btnPrevioursPage);
+            this.tpBill.Controls.Add(this.btnLastPage);
+            this.tpBill.Controls.Add(this.btnFirstPage);
             this.tpBill.Controls.Add(this.panel2);
             this.tpBill.Controls.Add(this.panel1);
             this.tpBill.Location = new System.Drawing.Point(4, 24);
@@ -869,25 +890,25 @@
             this.panel2.Controls.Add(this.dtgvBill);
             this.panel2.Location = new System.Drawing.Point(-4, 41);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(793, 379);
+            this.panel2.Size = new System.Drawing.Size(686, 331);
             this.panel2.TabIndex = 1;
             // 
             // dtgvBill
             // 
             this.dtgvBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvBill.Location = new System.Drawing.Point(4, 3);
+            this.dtgvBill.Location = new System.Drawing.Point(6, 3);
             this.dtgvBill.Name = "dtgvBill";
             this.dtgvBill.RowTemplate.Height = 25;
-            this.dtgvBill.Size = new System.Drawing.Size(682, 360);
+            this.dtgvBill.Size = new System.Drawing.Size(676, 328);
             this.dtgvBill.TabIndex = 0;
             this.dtgvBill.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvBill_CellContentClick);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnViewBill);
-            this.panel1.Controls.Add(this.dtptToDate);
-            this.panel1.Controls.Add(this.dtptFromDate);
+            this.panel1.Controls.Add(this.dtpkToDate);
+            this.panel1.Controls.Add(this.dtpkFromDate);
             this.panel1.Location = new System.Drawing.Point(0, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(686, 32);
@@ -903,20 +924,20 @@
             this.btnViewBill.UseVisualStyleBackColor = true;
             this.btnViewBill.Click += new System.EventHandler(this.btnViewBill_Click);
             // 
-            // dtptToDate
+            // dtpkToDate
             // 
-            this.dtptToDate.Location = new System.Drawing.Point(476, 3);
-            this.dtptToDate.Name = "dtptToDate";
-            this.dtptToDate.Size = new System.Drawing.Size(200, 23);
-            this.dtptToDate.TabIndex = 1;
-            this.dtptToDate.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
+            this.dtpkToDate.Location = new System.Drawing.Point(476, 3);
+            this.dtpkToDate.Name = "dtpkToDate";
+            this.dtpkToDate.Size = new System.Drawing.Size(200, 23);
+            this.dtpkToDate.TabIndex = 1;
+            this.dtpkToDate.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
-            // dtptFromDate
+            // dtpkFromDate
             // 
-            this.dtptFromDate.Location = new System.Drawing.Point(0, 3);
-            this.dtptFromDate.Name = "dtptFromDate";
-            this.dtptFromDate.Size = new System.Drawing.Size(200, 23);
-            this.dtptFromDate.TabIndex = 0;
+            this.dtpkFromDate.Location = new System.Drawing.Point(0, 3);
+            this.dtpkFromDate.Name = "dtpkFromDate";
+            this.dtpkFromDate.Size = new System.Drawing.Size(200, 23);
+            this.dtpkFromDate.TabIndex = 0;
             // 
             // tcAdmin
             // 
@@ -931,12 +952,54 @@
             this.tcAdmin.Size = new System.Drawing.Size(690, 435);
             this.tcAdmin.TabIndex = 0;
             // 
-            // tbAccountType
+            // btnFirstPage
             // 
-            this.tbAccountType.Location = new System.Drawing.Point(132, 9);
-            this.tbAccountType.Name = "tbAccountType";
-            this.tbAccountType.Size = new System.Drawing.Size(141, 23);
-            this.tbAccountType.TabIndex = 1;
+            this.btnFirstPage.Location = new System.Drawing.Point(3, 378);
+            this.btnFirstPage.Name = "btnFirstPage";
+            this.btnFirstPage.Size = new System.Drawing.Size(75, 23);
+            this.btnFirstPage.TabIndex = 2;
+            this.btnFirstPage.Text = "Trang đầu";
+            this.btnFirstPage.UseVisualStyleBackColor = true;
+            this.btnFirstPage.Click += new System.EventHandler(this.btnFirstPage_Click);
+            // 
+            // btnLastPage
+            // 
+            this.btnLastPage.Location = new System.Drawing.Point(599, 378);
+            this.btnLastPage.Name = "btnLastPage";
+            this.btnLastPage.Size = new System.Drawing.Size(75, 23);
+            this.btnLastPage.TabIndex = 3;
+            this.btnLastPage.Text = "Trang cuối";
+            this.btnLastPage.UseVisualStyleBackColor = true;
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
+            // 
+            // btnPrevioursPage
+            // 
+            this.btnPrevioursPage.Location = new System.Drawing.Point(87, 378);
+            this.btnPrevioursPage.Name = "btnPrevioursPage";
+            this.btnPrevioursPage.Size = new System.Drawing.Size(75, 23);
+            this.btnPrevioursPage.TabIndex = 4;
+            this.btnPrevioursPage.Text = "Trang trước";
+            this.btnPrevioursPage.UseVisualStyleBackColor = true;
+            this.btnPrevioursPage.Click += new System.EventHandler(this.btnPrevioursPage_Click);
+            // 
+            // btnNextPage
+            // 
+            this.btnNextPage.Location = new System.Drawing.Point(518, 378);
+            this.btnNextPage.Name = "btnNextPage";
+            this.btnNextPage.Size = new System.Drawing.Size(75, 23);
+            this.btnNextPage.TabIndex = 5;
+            this.btnNextPage.Text = "Trang tiếp theo";
+            this.btnNextPage.UseVisualStyleBackColor = true;
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
+            // 
+            // tbBillPage
+            // 
+            this.tbBillPage.Location = new System.Drawing.Point(298, 378);
+            this.tbBillPage.Name = "tbBillPage";
+            this.tbBillPage.ReadOnly = true;
+            this.tbBillPage.Size = new System.Drawing.Size(75, 23);
+            this.tbBillPage.TabIndex = 6;
+            this.tbBillPage.TextChanged += new System.EventHandler(this.tbBillByPage_TextChanged);
             // 
             // fAdmin
             // 
@@ -955,6 +1018,7 @@
             this.panel26.PerformLayout();
             this.panel25.ResumeLayout(false);
             this.panel25.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmAccountType)).EndInit();
             this.panel23.ResumeLayout(false);
             this.panel23.PerformLayout();
             this.panel24.ResumeLayout(false);
@@ -994,6 +1058,7 @@
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvFood)).EndInit();
             this.tpBill.ResumeLayout(false);
+            this.tpBill.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -1013,8 +1078,8 @@
         private Panel panel2;
         private DataGridView dtgvBill;
         private Panel panel1;
-        private DateTimePicker dtptToDate;
-        private DateTimePicker dtptFromDate;
+        private DateTimePicker dtpkToDate;
+        private DateTimePicker dtpkFromDate;
         private Button btnViewBill;
         private Panel panel6;
         private Panel panel5;
@@ -1086,6 +1151,11 @@
         private Button btnDeleteAccount;
         private Button btnUpdateAccount;
         private Button btnAddAccount;
-        private TextBox tbAccountType;
+        private NumericUpDown nmAccountType;
+        private TextBox tbBillPage;
+        private Button btnNextPage;
+        private Button btnPrevioursPage;
+        private Button btnLastPage;
+        private Button btnFirstPage;
     }
 }
