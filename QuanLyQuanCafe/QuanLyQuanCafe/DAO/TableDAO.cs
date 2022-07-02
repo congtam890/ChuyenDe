@@ -49,16 +49,16 @@ namespace QuanLyQuanCafe.DAO
             }
             return list;
         }
-        public bool InsertTable(string name, string status)
+        public bool InsertTable(string name)
         {
-            string query = string.Format("INSERT dbo.TableFood ( name, status )VALUES  ( N'{0}', {1})", name, status);
+            string query = string.Format("INSERT dbo.TableFood ( name )VALUES  ( N'{0}')", name);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;
         }
         public bool UpdateTable(int idTable, string name)
         {
-            string query = string.Format("UPDATE dbo.TableFood SET name = N'{1}' WHERE id = N'{0}'", name, idTable);
+            string query = string.Format("UPDATE dbo.TableFood SET name = N'{1}' WHERE id = N'{0}'", idTable, name);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;

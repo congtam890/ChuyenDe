@@ -384,6 +384,7 @@
             this.btnDeleteTable.TabIndex = 2;
             this.btnDeleteTable.Text = "Xóa";
             this.btnDeleteTable.UseVisualStyleBackColor = true;
+            this.btnDeleteTable.Click += new System.EventHandler(this.btnDeleteTable_Click);
             // 
             // btnUpdateTable
             // 
@@ -393,6 +394,7 @@
             this.btnUpdateTable.TabIndex = 1;
             this.btnUpdateTable.Text = "Sửa";
             this.btnUpdateTable.UseVisualStyleBackColor = true;
+            this.btnUpdateTable.Click += new System.EventHandler(this.btnUpdateTable_Click);
             // 
             // btnAddTable
             // 
@@ -402,6 +404,7 @@
             this.btnAddTable.TabIndex = 0;
             this.btnAddTable.Text = "Thêm";
             this.btnAddTable.UseVisualStyleBackColor = true;
+            this.btnAddTable.Click += new System.EventHandler(this.btnAddTable_Click);
             // 
             // dtgvTable
             // 
@@ -411,6 +414,7 @@
             this.dtgvTable.RowTemplate.Height = 25;
             this.dtgvTable.Size = new System.Drawing.Size(381, 328);
             this.dtgvTable.TabIndex = 6;
+            this.dtgvTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvTable_CellContentClick);
             // 
             // panel14
             // 

@@ -70,9 +70,9 @@ namespace QuanLyQuanCafe
         }
         void AddTableBinding()
         {
-            tbTableID.DataBindings.Add(new Binding("Text", dtgvCategory.DataSource, "ID", true, DataSourceUpdateMode.Never));
-            tbTableName.DataBindings.Add(new Binding("Text", dtgvCategory.DataSource, "Name", true, DataSourceUpdateMode.Never));
-            cbTableStatus.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "Status", true, DataSourceUpdateMode.Never));
+            tbTableID.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "ID", true, DataSourceUpdateMode.Never));
+            tbTableName.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Name", true, DataSourceUpdateMode.Never));
+            cbTableStatus.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Status", true, DataSourceUpdateMode.Never));
 
         }
 
@@ -173,8 +173,13 @@ namespace QuanLyQuanCafe
 
         #endregion
         #region Event
+        private void dtgvTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
         private void BtnShowTable_Click(object sender, EventArgs e)
         {
+            LoadListTable();
         }
         private void dtgvBill_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -492,7 +497,7 @@ namespace QuanLyQuanCafe
             int categoryID = Convert.ToInt32(tbCategoryID.Text);
             string name = tbNameCategory.Text;
 
-            if (CategoryDAO.Instance.InsertCategory( name))
+            if (CategoryDAO.Instance.UpdateCategory( categoryID,name))
             {
                 MessageBox.Show("Sửa danh mục thành công");
                 LoadListCategory();
@@ -541,9 +546,81 @@ namespace QuanLyQuanCafe
         {
             LoadListCategory();
         }
+        private event EventHandler insertTable;
+        public event EventHandler InsertTable
+        {
+            add { insertTable += value; }
+            remove { insertTable -= value; }
+        }
+
+        private event EventHandler deleteTable;
+        public event EventHandler DeleteTable
+        {
+            add { deleteTable += value; }
+            remove { deleteTable -= value; }
+        }
+
+        private event EventHandler updateTable;
+        public event EventHandler UpdateTable
+        {
+            add { updateTable += value; }
+            remove { updateTable -= value; }
+        }
+        private void btnUpdateTable_Click(object sender, EventArgs e)
+        {
+            int tableID = Convert.ToInt32(tbTableID.Text);
+            string name = tbTableName.Text;
+
+            if (TableDAO.Instance.UpdateTable(tableID, name))
+            {
+                MessageBox.Show("Sửa thông tin bàn thành công");
+                LoadListTable();
+                if (updateTable != null)
+                    updateTable(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi khi sửa thông tin bàn");
+            }
+        }
+
+        private void btnDeleteTable_Click(object sender, EventArgs e)
+        {
+            int tableID = Convert.ToInt32(tbTableID.Text);
+
+            if (TableDAO.Instance.DeleteTable(tableID))
+            {
+                MessageBox.Show("Xóa bàn thành công");
+                LoadListTable();
+                if (deleteTable != null)
+                    deleteTable(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi khi xóa bàn này ");
+            }
+        }
+
+        private void btnAddTable_Click(object sender, EventArgs e)
+        {
+            int tableID = Convert.ToInt32(tbTableID.Text);
+            string name = tbTableName.Text;
+
+            if (TableDAO.Instance.InsertTable(name))
+            {
+                MessageBox.Show("Thêm bàn thành công");
+                LoadListTable();
+                if (insertTable != null)
+                    insertTable(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi khi thêm bàn");
+            }
+        }
 
         #endregion
 
-        
+
     }
 }
