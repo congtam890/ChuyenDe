@@ -113,6 +113,7 @@ namespace QuanLyQuanCafe
         void LoadBillByDate(DateTime checkIn, DateTime checkOut)
         {
             dtgvBill.DataSource = BillDAO.Instance.GetBillListByDate(checkIn, checkOut);
+           
         }
         void AddAccount(string userName, string displayName, int type)
         {
@@ -373,6 +374,12 @@ namespace QuanLyQuanCafe
             tbBillPage.Text = lastPage.ToString();
         }
 
+        private void tbFinalTotalprice_TextChanged(object sender, EventArgs e)
+        {
+            dtgvBill.DataSource = BillDAO.Instance.GetTotalPrice(dtpkFromDate.Value, dtpkToDate.Value, Convert.ToInt32(tbFinalTotalprice.Text));
+
+
+        }
         private void btnPrevioursPage_Click(object sender, EventArgs e)
         {
             int page = Convert.ToInt32(tbBillPage.Text);
@@ -618,6 +625,7 @@ namespace QuanLyQuanCafe
                 MessageBox.Show("Có lỗi khi thêm bàn");
             }
         }
+        
 
         #endregion
 

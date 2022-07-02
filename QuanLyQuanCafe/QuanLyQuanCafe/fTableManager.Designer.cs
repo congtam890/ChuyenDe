@@ -55,6 +55,7 @@
             this.toolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thanhToánToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chuyểnBànToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bill = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nDiscount)).BeginInit();
@@ -84,6 +85,7 @@
             this.lsvBill.TabIndex = 0;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
             this.lsvBill.View = System.Windows.Forms.View.Details;
+            this.lsvBill.SelectedIndexChanged += new System.EventHandler(this.lsvBill_SelectedIndexChanged_1);
             // 
             // columnHeader1
             // 
@@ -127,6 +129,7 @@
             this.txbTotalPrice.TabIndex = 8;
             this.txbTotalPrice.Text = "0";
             this.txbTotalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txbTotalPrice.TextChanged += new System.EventHandler(this.txbTotalPrice_TextChanged);
             // 
             // cbChuyenBan
             // 
@@ -188,6 +191,11 @@
             // nmFoodCount
             // 
             this.nmFoodCount.Location = new System.Drawing.Point(276, 20);
+            this.nmFoodCount.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.nmFoodCount.Name = "nmFoodCount";
             this.nmFoodCount.Size = new System.Drawing.Size(31, 23);
             this.nmFoodCount.TabIndex = 3;
@@ -274,7 +282,8 @@
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.adminToolStripMenuItem,
             this.thôngTinTàiKhoảnToolStripMenuItem,
-            this.toolToolStripMenuItem});
+            this.toolToolStripMenuItem,
+            this.bill});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(868, 24);
@@ -305,6 +314,13 @@
             this.chuyểnBànToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.chuyểnBànToolStripMenuItem.Text = "Chuyển bàn";
             this.chuyểnBànToolStripMenuItem.Click += new System.EventHandler(this.chuyểnBànToolStripMenuItem_Click);
+            // 
+            // bill
+            // 
+            this.bill.Name = "bill";
+            this.bill.Size = new System.Drawing.Size(35, 20);
+            this.bill.Text = "bill";
+            this.bill.Click += new System.EventHandler(this.bill_Click);
             // 
             // fTableManager
             // 
@@ -360,5 +376,6 @@
         private ToolStripMenuItem toolToolStripMenuItem;
         private ToolStripMenuItem thanhToánToolStripMenuItem;
         private ToolStripMenuItem chuyểnBànToolStripMenuItem;
+        private ToolStripMenuItem bill;
     }
 }

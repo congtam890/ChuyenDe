@@ -104,6 +104,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.dtgvFood = new System.Windows.Forms.DataGridView();
             this.tpBill = new System.Windows.Forms.TabPage();
+            this.tbFinalTotalprice = new System.Windows.Forms.TextBox();
             this.tbBillPage = new System.Windows.Forms.TextBox();
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnPrevioursPage = new System.Windows.Forms.Button();
@@ -184,7 +185,7 @@
             this.dtgvAccount.Location = new System.Drawing.Point(3, 3);
             this.dtgvAccount.Name = "dtgvAccount";
             this.dtgvAccount.RowTemplate.Height = 25;
-            this.dtgvAccount.Size = new System.Drawing.Size(375, 322);
+            this.dtgvAccount.Size = new System.Drawing.Size(350, 117);
             this.dtgvAccount.TabIndex = 0;
             this.dtgvAccount.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvAccount_CellContentClick);
             // 
@@ -412,7 +413,7 @@
             this.dtgvTable.Location = new System.Drawing.Point(-1, 75);
             this.dtgvTable.Name = "dtgvTable";
             this.dtgvTable.RowTemplate.Height = 25;
-            this.dtgvTable.Size = new System.Drawing.Size(381, 328);
+            this.dtgvTable.Size = new System.Drawing.Size(357, 326);
             this.dtgvTable.TabIndex = 6;
             this.dtgvTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvTable_CellContentClick);
             // 
@@ -535,7 +536,7 @@
             this.dtgvCategory.Location = new System.Drawing.Point(3, 3);
             this.dtgvCategory.Name = "dtgvCategory";
             this.dtgvCategory.RowTemplate.Height = 25;
-            this.dtgvCategory.Size = new System.Drawing.Size(375, 322);
+            this.dtgvCategory.Size = new System.Drawing.Size(267, 156);
             this.dtgvCategory.TabIndex = 0;
             // 
             // panel12
@@ -886,6 +887,7 @@
             // 
             // tpBill
             // 
+            this.tpBill.Controls.Add(this.tbFinalTotalprice);
             this.tpBill.Controls.Add(this.tbBillPage);
             this.tpBill.Controls.Add(this.btnNextPage);
             this.tpBill.Controls.Add(this.btnPrevioursPage);
@@ -901,6 +903,15 @@
             this.tpBill.Text = "Doanh thu";
             this.tpBill.UseVisualStyleBackColor = true;
             this.tpBill.Click += new System.EventHandler(this.tpBill_Click);
+            // 
+            // tbFinalTotalprice
+            // 
+            this.tbFinalTotalprice.Location = new System.Drawing.Point(396, 378);
+            this.tbFinalTotalprice.Name = "tbFinalTotalprice";
+            this.tbFinalTotalprice.ReadOnly = true;
+            this.tbFinalTotalprice.Size = new System.Drawing.Size(100, 23);
+            this.tbFinalTotalprice.TabIndex = 7;
+            this.tbFinalTotalprice.TextChanged += new System.EventHandler(this.tbFinalTotalprice_TextChanged);
             // 
             // tbBillPage
             // 
@@ -1176,5 +1187,6 @@
         private Button btnPrevioursPage;
         private Button btnLastPage;
         private Button btnFirstPage;
+        private TextBox tbFinalTotalprice;
     }
 }

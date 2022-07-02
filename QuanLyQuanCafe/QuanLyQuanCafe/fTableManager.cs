@@ -284,6 +284,19 @@ namespace QuanLyQuanCafe
             }
 
         }
+        private void txbTotalPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void lsvBill_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+        private void bill_Click(object sender, EventArgs e)
+        {
+            fbill f = new fbill();
+            f.ShowDialog();
+        }
         #endregion
 
 

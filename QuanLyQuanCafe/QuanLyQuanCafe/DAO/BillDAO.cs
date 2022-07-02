@@ -62,6 +62,10 @@ namespace QuanLyQuanCafe.DAO
             return DataProvider.Instance.ExecuteQuery("exec USP_GetListBillByDateAndPage @checkIn , @checkOut , @page", new object[] { checkIn, checkOut, pageNum });
         }
 
+        public float GetTotalPrice(DateTime checkIn, DateTime checkOut, float total )
+        {
+            return (float)DataProvider.Instance.ExecuteScalar("exec usp_GetTotalPrice @checkIn , @checkOut", new object[] { checkIn, checkOut, total });
+        }
         public int GetNumBillListByDate(DateTime checkIn, DateTime checkOut)
         {
             return (int)DataProvider.Instance.ExecuteScalar("exec USP_GetNumBillByDate @checkIn , @checkOut", new object[] { checkIn, checkOut });

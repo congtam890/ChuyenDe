@@ -76,3 +76,4 @@ C:\Users\HP\Desktop\New folder (2)\ChuyenDe\QuanLyQuanCafe\QuanLyQuanCafe\obj\De
 C:\Users\HP\Desktop\New folder (2)\ChuyenDe\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\net6.0-windows\QuanLyQuanCafe.pdb
 C:\Users\HP\Desktop\New folder (2)\ChuyenDe\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\net6.0-windows\QuanLyQuanCafe.genruntimeconfig.cache
 C:\Users\HP\Desktop\New folder (2)\ChuyenDe\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\net6.0-windows\ref\QuanLyQuanCafe.dll
+C:\Users\HP\Desktop\ChuyenDe\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\net6.0-windows\QuanLyQuanCafe.fbill.resources

@@ -94,8 +94,8 @@ foreign key (idCategory) references dbo.FoodCategory(id),
 )
 create table Bill
 (id int identity primary key,
-DateCheckIn date not null default getdate(),
-DateCheckOut date,
+DateCheckIn datetime not null default getdate(),
+DateCheckOut datetime,
 idTable int not null,
 status int not null default 0,
 discount int not null,
@@ -141,7 +141,7 @@ insert into dbo.Food values(N'Mì tôm trứng + xúc xích',4,25000);
 
 -----them table------
 declare @i int = 1
-while @i <= 10
+while @i <= 15
 begin
 	insert into dbo.TableFood(name) values (N'Bàn'+ cast(@i as nvarchar(100)))
 	set @i = @i +1
@@ -396,22 +396,26 @@ end
 CREATE FUNCTION dbo.fuConvertToUnsign1 ( @strInput NVARCHAR(4000) ) RETURNS NVARCHAR(4000) AS BEGIN IF @strInput IS NULL RETURN @strInput IF @strInput = '' RETURN @strInput DECLARE @RT NVARCHAR(4000) DECLARE @SIGN_CHARS NCHAR(136) DECLARE @UNSIGN_CHARS NCHAR (136) SET @SIGN_CHARS = N'ăâđêôơưàảãạáằẳẵặắầẩẫậấèẻẽẹéềểễệế ìỉĩịíòỏõọóồổỗộốờởỡợớùủũụúừửữựứỳỷỹỵý ĂÂĐÊÔƠƯÀẢÃẠÁẰẲẴẶẮẦẨẪẬẤÈẺẼẸÉỀỂỄỆẾÌỈĨỊÍ ÒỎÕỌÓỒỔỖỘỐỜỞỠỢỚÙỦŨỤÚỪỬỮỰỨỲỶỸỴÝ' +NCHAR(272)+ NCHAR(208) SET @UNSIGN_CHARS = N'aadeoouaaaaaaaaaaaaaaaeeeeeeeeee iiiiiooooooooooooooouuuuuuuuuuyyyyy AADEOOUAAAAAAAAAAAAAAAEEEEEEEEEEIIIII OOOOOOOOOOOOOOOUUUUUUUUUUYYYYYDD' DECLARE @COUNTER int DECLARE @COUNTER1 int SET @COUNTER = 1 WHILE (@COUNTER <=LEN(@strInput)) BEGIN SET @COUNTER1 = 1 WHILE (@COUNTER1 <=LEN(@SIGN_CHARS)+1) BEGIN IF UNICODE(SUBSTRING(@SIGN_CHARS, @COUNTER1,1)) = UNICODE(SUBSTRING(@strInput,@COUNTER ,1) ) BEGIN IF @COUNTER=1 SET @strInput = SUBSTRING(@UNSIGN_CHARS, @COUNTER1,1) + SUBSTRING(@strInput, @COUNTER+1,LEN(@strInput)-1) ELSE SET @strInput = SUBSTRING(@strInput, 1, @COUNTER-1) +SUBSTRING(@UNSIGN_CHARS, @COUNTER1,1) + SUBSTRING(@strInput, @COUNTER+1,LEN(@strInput)- @COUNTER) BREAK END SET @COUNTER1 = @COUNTER1 +1 END SET @COUNTER = @COUNTER +1 END SET @strInput = replace(@strInput,' ','-') RETURN @strInput END
 GO
 -----------
-CREATE PROC dbo.USP_GetListBillByDateAndPage
+
+
+CREATE alter PROC dbo.USP_GetListBillByDateAndPage
 @checkIn date, @checkOut date, @page int
 AS 
 BEGIN
+	
 	declare @pageRows INT = 10
 	declare @selectRows INT = @pageRows
 	declare @exceptRows INT = (@page - 1) * @pageRows
 	
 	;with BillShow AS( SELECT b.ID, t.name AS [Tên bàn], b.totalPrice AS [Tổng tiền], DateCheckIn AS [Ngày vào], DateCheckOut AS [Ngày ra], discount AS [Giảm giá]
-	from dbo.Bill AS b,dbo.TableFood AS t
+	from dbo.Bill AS b,dbo.TableFood AS t, dbo.BillInfo as bi
 	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1
-	AND t.id = b.idTable)
+	AND t.id = b.idTable and b.ID = bi.id)
 	
-	SELECT TOP (@selectRows) * FROM BillShow WHERE id NOT IN (SELECT TOP (@exceptRows) id FROM BillShow)
+	SELECT TOP (@selectRows) * FROM BillShow WHERE id NOT IN (SELECT TOP (@exceptRows) id FROM BillShow) 
 END
 go
+-----------------------------
 create proc dbo.USP_GetNumBillByDate
 @checkIn date, @checkOut date
 as 
@@ -422,3 +426,16 @@ begin
 	AND t.id = b.idTable
 end
 go
+------------------------------
+CREATE alter PROC dbo.usp_GetTotalPrice
+@checkIn datetime, @checkOut datetime
+AS	
+	SELECT sum(b.totalPrice)
+	from dbo.Bill AS b,dbo.TableFood AS t
+	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1 AND t.id = b.idTable
+go
+------lấy ra danh sach bill-----------
+SELECT b.ID, t.name AS [Tên bàn], b.totalPrice AS [Tổng tiền], DateCheckIn AS [Ngày vào], DateCheckOut AS [Ngày ra], discount AS [Giảm giá], f.name [tên món] ,f.[]
+	from dbo.Bill AS b,dbo.TableFood AS t, dbo.BillInfo as bi, dbo.Food as f
+	WHERE   b.status = 1 AND t.id = b.idTable and b.ID = bi.id 
+select 
