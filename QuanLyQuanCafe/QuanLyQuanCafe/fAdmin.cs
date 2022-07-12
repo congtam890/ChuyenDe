@@ -50,7 +50,7 @@ namespace QuanLyQuanCafe
             AddAcountBinding();
             AddCategoryBinding();
             AddTableBinding();
-          //  DoanhThu(dtpkFromDate.Value, dtpkToDate.Value);
+           DoanhThu(dtpkFromDate.Value, dtpkToDate.Value);
         }
         void AddAcountBinding()
         {
@@ -173,12 +173,14 @@ namespace QuanLyQuanCafe
                 MessageBox.Show("Đặt lại mật khẩu thất bại");
             }
         }
-        void DoanhThu(DateTime checkIn, DateTime checkOut)
-        {
-            float FinalTotalprice = BillDAO.Instance.GetTotalPrice(checkIn, checkOut);
-            tbFinalTotalprice.Text = FinalTotalprice.ToString();
+       void DoanhThu(DateTime checkIn, DateTime checkOut)
+       {
+            double totalPrice = BillDAO.Instance.GetTotalPrice(dtpkFromDate.Value, dtpkToDate.Value);
+            CultureInfo culture = new CultureInfo("vi-VN");
+            tbFinalTotalprice.Text = totalPrice.ToString("c", culture);
+           
         }
-
+       
         #endregion
         #region Event
         private void dtgvTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -260,6 +262,7 @@ namespace QuanLyQuanCafe
         private void btnViewBill_Click(object sender, EventArgs e)
         {
             LoadBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
+            DoanhThu(dtpkFromDate.Value, dtpkToDate.Value);
         }
 
         private void btbAddFood_Click(object sender, EventArgs e)
@@ -383,7 +386,8 @@ namespace QuanLyQuanCafe
 
         private void tbFinalTotalprice_TextChanged(object sender, EventArgs e)
         {
-            BillDAO.Instance.GetTotalPrice(dtpkFromDate.Value, dtpkToDate.Value);
+  
+
         }
         private void btnPrevioursPage_Click(object sender, EventArgs e)
         {

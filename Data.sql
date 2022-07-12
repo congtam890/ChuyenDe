@@ -428,14 +428,10 @@ end
 go
 ------------------------------
 
-CREATE  PROC dbo.USP_GetTotalPrice
-@checkIn datetime, @checkOut datetime
+CREATE PROC dbo.USP_GetTotalPrice
+@checkIn date, @checkOut date
 AS	  
-	SELECT sum(b.totalPrice)
-	from dbo.Bill AS b,dbo.TableFood AS t
-	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1 AND t.id = b.idTable
+	SELECT sum(b.totalPrice) 
+	from dbo.Bill as b 
+	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1
 go
-
-
-exec dbo.USP_GetTotalPrice @checkIn = '2022-07-01',
-@checkOut = '2022-07-31'

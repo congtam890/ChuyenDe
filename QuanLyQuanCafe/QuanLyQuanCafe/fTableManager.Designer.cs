@@ -55,7 +55,6 @@
             this.toolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thanhToánToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chuyểnBànToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bill = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -247,8 +246,8 @@
             // adminToolStripMenuItem
             // 
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.adminToolStripMenuItem.Text = "Amin";
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.adminToolStripMenuItem.Text = "Admin";
             this.adminToolStripMenuItem.Click += new System.EventHandler(this.aminToolStripMenuItem_Click);
             // 
             // thôngTinTàiKhoảnToolStripMenuItem
@@ -283,8 +282,7 @@
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.adminToolStripMenuItem,
             this.thôngTinTàiKhoảnToolStripMenuItem,
-            this.toolToolStripMenuItem,
-            this.bill});
+            this.toolToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(868, 24);
@@ -315,13 +313,6 @@
             this.chuyểnBànToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.chuyểnBànToolStripMenuItem.Text = "Chuyển bàn";
             this.chuyểnBànToolStripMenuItem.Click += new System.EventHandler(this.chuyểnBànToolStripMenuItem_Click);
-            // 
-            // bill
-            // 
-            this.bill.Name = "bill";
-            this.bill.Size = new System.Drawing.Size(35, 20);
-            this.bill.Text = "bill";
-            this.bill.Click += new System.EventHandler(this.bill_Click);
             // 
             // btnRefresh
             // 
@@ -388,7 +379,6 @@
         private ToolStripMenuItem toolToolStripMenuItem;
         private ToolStripMenuItem thanhToánToolStripMenuItem;
         private ToolStripMenuItem chuyểnBànToolStripMenuItem;
-        private ToolStripMenuItem bill;
         private Button btnRefresh;
     }
 }
