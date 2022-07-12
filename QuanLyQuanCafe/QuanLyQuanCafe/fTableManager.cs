@@ -50,7 +50,7 @@ namespace QuanLyQuanCafe
             cbFood.DataSource = listFood;
             cbFood.DisplayMember = "Name";
         }
-        void LoadTable()
+         void LoadTable()
         {
             flpTable.Controls.Clear();
             List<Table> tableList = TableDAO.Instance.LoadTableList();
@@ -94,7 +94,7 @@ namespace QuanLyQuanCafe
             }
             CultureInfo culture = new CultureInfo("vi-VN");
 
-            txbTotalPrice.Text = totalPrice.ToString("c", culture);
+            txbTotalPrice.Text = totalPrice.ToString("c",culture);
 
         }
         #endregion
@@ -121,6 +121,9 @@ namespace QuanLyQuanCafe
             f.InsertFood += f_InsertFood;
             f.DeleteFood += f_DeleteFood;
             f.UpdateFood += f_UpdateFood;
+            f.InsertFood += f_InsertCategory;
+            f.DeleteFood += f_DeleteCategory;
+            f.UpdateFood += f_UpdateCategory;
             f.ShowDialog();
         }
 
@@ -140,6 +143,27 @@ namespace QuanLyQuanCafe
         }
 
         void f_InsertFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategoryID((cbCategory.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+        void f_UpdateCategory(object sender, EventArgs e)
+        {
+            LoadFoodListByCategoryID((cbCategory.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+
+        void f_DeleteCategory(object sender, EventArgs e)
+        {
+            LoadFoodListByCategoryID((cbCategory.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
+        }
+
+        void f_InsertCategory(object sender, EventArgs e)
         {
             LoadFoodListByCategoryID((cbCategory.SelectedItem as Category).ID);
             if (lsvBill.Tag != null)
@@ -246,21 +270,28 @@ namespace QuanLyQuanCafe
         }
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            Table table = lsvBill.Tag as Table;
-            int idBill = BillDAO.Instance.GetUncheckBillIDbyTableID(table.ID);
-            int discount = (int)nDiscount.Value;
-
-            double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split('.')[0]);
-            double finalTotalPrice = totalPrice - (totalPrice / 100) * discount;
-
-            if (idBill != -1) 
+            try
             {
-                if (MessageBox.Show("Bạn có muốn thanh toán bàn " + table.Name + "\n Tổng tiền là " + finalTotalPrice*1000, "thông báo ", MessageBoxButtons.OKCancel) == DialogResult.OK)
+
+                Table table = lsvBill.Tag as Table;
+                int idBill = BillDAO.Instance.GetUncheckBillIDbyTableID(table.ID);
+                int discount = (int)nDiscount.Value;
+
+                double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split('.')[0]) * 1000;
+                double finalTotalPrice = totalPrice - (totalPrice / 100) * discount;
+
+                if (idBill != -1)
                 {
-                    BillDAO.Instance.CheckOut(idBill, discount, (float)finalTotalPrice);
-                    ShowBill(table.ID);
-                    LoadTable();
+                    if (MessageBox.Show("Bạn có muốn thanh toán bàn " + table.Name + "\n Tổng tiền là " + finalTotalPrice, "thông báo ", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        BillDAO.Instance.CheckOut(idBill, discount, (float)finalTotalPrice);
+                        ShowBill(table.ID);
+                        LoadTable();
+                    }
                 }
+            }
+            catch
+            {
             }
         }
         private void thanhToánToolStripMenuItem_Click(object sender, EventArgs e)
@@ -286,7 +317,7 @@ namespace QuanLyQuanCafe
         }
         private void txbTotalPrice_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
         private void lsvBill_SelectedIndexChanged_1(object sender, EventArgs e)
         {
@@ -296,6 +327,10 @@ namespace QuanLyQuanCafe
         {
             fbill f = new fbill();
             f.ShowDialog();
+        }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadTable();
         }
         #endregion
 

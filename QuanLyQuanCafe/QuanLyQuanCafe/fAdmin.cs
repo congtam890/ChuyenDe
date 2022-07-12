@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using System.Globalization;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.ListViewItem;
 
 namespace QuanLyQuanCafe
 {
@@ -37,8 +38,9 @@ namespace QuanLyQuanCafe
             dtgvCategory.DataSource = categoryList;
             dtgvTable.DataSource = tableList;
 
-            LoadBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
+            
             LoadDateTimePickerBill();
+            LoadBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
             LoadListFood();
             LoadAccount();
             LoadListCategory();
@@ -48,7 +50,7 @@ namespace QuanLyQuanCafe
             AddAcountBinding();
             AddCategoryBinding();
             AddTableBinding();
-
+          //  DoanhThu(dtpkFromDate.Value, dtpkToDate.Value);
         }
         void AddAcountBinding()
         {
@@ -113,8 +115,8 @@ namespace QuanLyQuanCafe
         void LoadBillByDate(DateTime checkIn, DateTime checkOut)
         {
             dtgvBill.DataSource = BillDAO.Instance.GetBillListByDate(checkIn, checkOut);
-           
         }
+        
         void AddAccount(string userName, string displayName, int type)
         {
             if (AccountDAO.Instance.InsertAccount(userName, displayName, type))
@@ -170,6 +172,11 @@ namespace QuanLyQuanCafe
             {
                 MessageBox.Show("Đặt lại mật khẩu thất bại");
             }
+        }
+        void DoanhThu(DateTime checkIn, DateTime checkOut)
+        {
+            float FinalTotalprice = BillDAO.Instance.GetTotalPrice(checkIn, checkOut);
+            tbFinalTotalprice.Text = FinalTotalprice.ToString();
         }
 
         #endregion
@@ -376,9 +383,7 @@ namespace QuanLyQuanCafe
 
         private void tbFinalTotalprice_TextChanged(object sender, EventArgs e)
         {
-            dtgvBill.DataSource = BillDAO.Instance.GetTotalPrice(dtpkFromDate.Value, dtpkToDate.Value, Convert.ToInt32(tbFinalTotalprice.Text));
-
-
+            BillDAO.Instance.GetTotalPrice(dtpkFromDate.Value, dtpkToDate.Value);
         }
         private void btnPrevioursPage_Click(object sender, EventArgs e)
         {
@@ -606,6 +611,7 @@ namespace QuanLyQuanCafe
             {
                 MessageBox.Show("Có lỗi khi xóa bàn này ");
             }
+            
         }
 
         private void btnAddTable_Click(object sender, EventArgs e)
@@ -624,6 +630,7 @@ namespace QuanLyQuanCafe
             {
                 MessageBox.Show("Có lỗi khi thêm bàn");
             }
+            
         }
         
 

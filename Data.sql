@@ -345,7 +345,7 @@ CREATE PROC dbo.USP_GetListBillByDate
 @checkIn date, @checkOut date
 AS 
 BEGIN
-	SELECT t.name AS [Tên bàn], b.totalPrice*1000 AS [Tổng tiền], DateCheckIn AS [Ngày vào], DateCheckOut AS [Ngày ra], discount AS [Giảm giá]
+	SELECT t.name AS [Tên bàn], b.totalPrice AS [Tổng tiền], DateCheckIn AS [Ngày vào], DateCheckOut AS [Ngày ra], discount AS [Giảm giá]
 	FROM dbo.Bill AS b,dbo.TableFood AS t
 	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1
 	AND t.id = b.idTable
@@ -398,21 +398,20 @@ GO
 -----------
 
 
-CREATE alter PROC dbo.USP_GetListBillByDateAndPage
+CREATE PROC dbo.USP_GetListBillByDateAndPage
 @checkIn date, @checkOut date, @page int
 AS 
-BEGIN
+BEGIN	
+	DECLARE @pageRows INT = 10
+	DECLARE @selectRows INT = @pageRows
+	DECLARE @exceptRows INT = (@page - 1) * @pageRows
 	
-	declare @pageRows INT = 10
-	declare @selectRows INT = @pageRows
-	declare @exceptRows INT = (@page - 1) * @pageRows
-	
-	;with BillShow AS( SELECT b.ID, t.name AS [Tên bàn], b.totalPrice AS [Tổng tiền], DateCheckIn AS [Ngày vào], DateCheckOut AS [Ngày ra], discount AS [Giảm giá]
-	from dbo.Bill AS b,dbo.TableFood AS t, dbo.BillInfo as bi
+	;WITH BillShow AS( SELECT b.ID, t.name AS [Tên bàn], b.totalPrice AS [Tổng tiền], DateCheckIn AS [Ngày vào], DateCheckOut AS [Ngày ra], discount AS [Giảm giá]
+	FROM dbo.Bill AS b,dbo.TableFood AS t
 	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1
-	AND t.id = b.idTable and b.ID = bi.id)
+	AND t.id = b.idTable)
 	
-	SELECT TOP (@selectRows) * FROM BillShow WHERE id NOT IN (SELECT TOP (@exceptRows) id FROM BillShow) 
+	SELECT TOP (@selectRows) * FROM BillShow WHERE id NOT IN (SELECT TOP (@exceptRows) id FROM BillShow)
 END
 go
 -----------------------------
@@ -420,6 +419,7 @@ create proc dbo.USP_GetNumBillByDate
 @checkIn date, @checkOut date
 as 
 begin
+	
 	select COUNT(*)
 	from dbo.Bill as b,dbo.TableFood AS t
 	where DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1
@@ -427,15 +427,15 @@ begin
 end
 go
 ------------------------------
-CREATE alter PROC dbo.usp_GetTotalPrice
+
+CREATE  PROC dbo.USP_GetTotalPrice
 @checkIn datetime, @checkOut datetime
-AS	
+AS	  
 	SELECT sum(b.totalPrice)
 	from dbo.Bill AS b,dbo.TableFood AS t
 	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1 AND t.id = b.idTable
 go
-------lấy ra danh sach bill-----------
-SELECT b.ID, t.name AS [Tên bàn], b.totalPrice AS [Tổng tiền], DateCheckIn AS [Ngày vào], DateCheckOut AS [Ngày ra], discount AS [Giảm giá], f.name [tên món] ,f.[]
-	from dbo.Bill AS b,dbo.TableFood AS t, dbo.BillInfo as bi, dbo.Food as f
-	WHERE   b.status = 1 AND t.id = b.idTable and b.ID = bi.id 
-select 
+
+
+exec dbo.USP_GetTotalPrice @checkIn = '2022-07-01',
+@checkOut = '2022-07-31'

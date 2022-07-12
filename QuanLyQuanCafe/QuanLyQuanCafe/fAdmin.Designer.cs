@@ -117,6 +117,7 @@
             this.dtpkToDate = new System.Windows.Forms.DateTimePicker();
             this.dtpkFromDate = new System.Windows.Forms.DateTimePicker();
             this.tcAdmin = new System.Windows.Forms.TabControl();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tpAccount.SuspendLayout();
             this.panel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).BeginInit();
@@ -156,6 +157,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).BeginInit();
             this.panel1.SuspendLayout();
             this.tcAdmin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tpAccount
@@ -536,7 +538,7 @@
             this.dtgvCategory.Location = new System.Drawing.Point(3, 3);
             this.dtgvCategory.Name = "dtgvCategory";
             this.dtgvCategory.RowTemplate.Height = 25;
-            this.dtgvCategory.Size = new System.Drawing.Size(267, 156);
+            this.dtgvCategory.Size = new System.Drawing.Size(242, 143);
             this.dtgvCategory.TabIndex = 0;
             // 
             // panel12
@@ -887,6 +889,7 @@
             // 
             // tpBill
             // 
+            this.tpBill.Controls.Add(this.dataGridView1);
             this.tpBill.Controls.Add(this.tbFinalTotalprice);
             this.tpBill.Controls.Add(this.tbBillPage);
             this.tpBill.Controls.Add(this.btnNextPage);
@@ -906,11 +909,14 @@
             // 
             // tbFinalTotalprice
             // 
+            this.tbFinalTotalprice.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.tbFinalTotalprice.Location = new System.Drawing.Point(396, 378);
             this.tbFinalTotalprice.Name = "tbFinalTotalprice";
             this.tbFinalTotalprice.ReadOnly = true;
-            this.tbFinalTotalprice.Size = new System.Drawing.Size(100, 23);
+            this.tbFinalTotalprice.Size = new System.Drawing.Size(100, 25);
             this.tbFinalTotalprice.TabIndex = 7;
+            this.tbFinalTotalprice.Text = "0";
+            this.tbFinalTotalprice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbFinalTotalprice.TextChanged += new System.EventHandler(this.tbFinalTotalprice_TextChanged);
             // 
             // tbBillPage
@@ -1031,6 +1037,15 @@
             this.tcAdmin.Size = new System.Drawing.Size(690, 435);
             this.tcAdmin.TabIndex = 0;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(168, 378);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(114, 23);
+            this.dataGridView1.TabIndex = 8;
+            // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1093,6 +1108,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).EndInit();
             this.panel1.ResumeLayout(false);
             this.tcAdmin.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1188,5 +1204,6 @@
         private Button btnLastPage;
         private Button btnFirstPage;
         private TextBox tbFinalTotalprice;
+        private DataGridView dataGridView1;
     }
 }

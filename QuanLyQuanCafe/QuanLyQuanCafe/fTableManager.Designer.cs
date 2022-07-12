@@ -56,6 +56,7 @@
             this.thanhToánToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chuyểnBànToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bill = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nDiscount)).BeginInit();
@@ -322,11 +323,22 @@
             this.bill.Text = "bill";
             this.bill.Click += new System.EventHandler(this.bill_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(484, 42);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(38, 40);
+            this.btnRefresh.TabIndex = 6;
+            this.btnRefresh.Text = "( )";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // fTableManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 471);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.flpTable);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -377,5 +389,6 @@
         private ToolStripMenuItem thanhToánToolStripMenuItem;
         private ToolStripMenuItem chuyểnBànToolStripMenuItem;
         private ToolStripMenuItem bill;
+        private Button btnRefresh;
     }
 }
