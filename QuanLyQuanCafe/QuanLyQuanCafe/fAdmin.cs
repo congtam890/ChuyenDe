@@ -119,14 +119,15 @@ namespace QuanLyQuanCafe
         
         void AddAccount(string userName, string displayName, int type)
         {
-            if (AccountDAO.Instance.InsertAccount(userName, displayName, type))
+            try
             {
-                MessageBox.Show("Thêm tài khoản thành công");
+                if (AccountDAO.Instance.InsertAccount(userName, displayName, type))
+                {
+                    MessageBox.Show("Thêm tài khoản thành công");
+                }
+
             }
-            else
-            {
-                MessageBox.Show("Thêm tài khoản thất bại");
-            }
+            catch { MessageBox.Show("Thêm tài khoản thất bại"); }
 
             LoadAccount();
         }
@@ -164,14 +165,18 @@ namespace QuanLyQuanCafe
         }
         void ResetPass(string userName)
         {
-            if (AccountDAO.Instance.ResetPassword(userName))
+            try
             {
-                MessageBox.Show("Đặt lại mật khẩu thành công");
+                if (AccountDAO.Instance.ResetPassword(userName))
+                {
+                    MessageBox.Show("Đặt lại mật khẩu thành công");
+                }
             }
-            else
+            catch
             {
                 MessageBox.Show("Đặt lại mật khẩu thất bại");
             }
+            
         }
        void DoanhThu(DateTime checkIn, DateTime checkOut)
        {
@@ -636,7 +641,13 @@ namespace QuanLyQuanCafe
             }
             
         }
-        
+
+        private void btnResetPassword_Click(object sender, EventArgs e)
+        {
+            string userName = tbUserName.Text;
+
+            ResetPass(userName);
+        }
 
         #endregion
 
